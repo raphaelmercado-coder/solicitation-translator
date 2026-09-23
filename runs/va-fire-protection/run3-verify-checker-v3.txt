@@ -1,0 +1,5 @@
+verify.py  runs/va-fire-protection/run3-output.md  against  inputs/va-fire-protection
+Part A: 12 filled, 2 not in source, 0 conflict
+Part B: 150 rows, 0 requirement(s) dropped
+Part C: 8 rows
+RESULT: PASS (0 failure(s), 0 warning(s))

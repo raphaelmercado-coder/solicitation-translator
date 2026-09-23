@@ -43,36 +43,62 @@ contain no trigger.
 
 ---
 
-## Example 2: a Sources Sought with gaps
+## Example 2: market research with gaps and labeled values
 
-**Input (F1 = `SS_Notice.docx`):**
+**Input (F1 = `RFI_Grounds.pdf`, page 1, a notice page):**
 
-> SET-ASIDE: [blank]
-> This is a Sources Sought Notice only. This is not a request for quotes.
-> Responses shall not exceed 5 pages. Based on responses, this requirement
-> may be set-aside for small business.
+> Type: Request for Information
+> Set Aside: (blank)
+> Background: The agency is conducting market research only. The Government
+> intends to consider HUBZone firms if two or more capable sources respond.
+> Primary Contact: Dana Whitlock, Contracting Officer, 555-010-4477
+> Secondary Contact: Luis Ferro, luis.ferro@agency.gov
+> Term: 5
 
 **Output (excerpts):**
 
 ```
 ### A02 Notice type
-Value: Sources Sought Notice
-Source: F1 DESCRIPTION
-> This is a Sources Sought Notice only. This is not a request for quotes.
+Value: Request for Information
+Source: F1 p.1
+> Type:
+> Request for Information
 
 ### A06 Set-aside
-Value: this requirement may be set-aside for small business
-Source: F1 DESCRIPTION
-> Based on responses, this requirement may be set-aside for small business.
+Value: The Government intends to consider HUBZone firms if two or more capable sources respond.
+Source: F1 p.1
+> The Government intends to consider HUBZone firms if two or more capable sources respond.
+
+### A10 Point of contact
+Value: Dana Whitlock
+Value: 555-010-4477
+Value: Luis Ferro
+Value: luis.ferro@agency.gov
+Source: F1 p.1
+> Primary Contact: Dana Whitlock, Contracting Officer, 555-010-4477
+Source: F1 p.1
+> Secondary Contact: Luis Ferro, luis.ferro@agency.gov
+
+### A12 Period of performance
+Value: Term: 5
+Source: F1 p.1
+> Term: 5
 
 ### A14 Evaluation basis
 Value: not in source
 ```
 
-Why: the SET-ASIDE box is blank, so it adds nothing, but the text states a
-possibility. The value keeps "may". A02 is the notice's own words; it is not
-turned into "RFI" or "RFQ". A Sources Sought has no evaluation basis here,
-so A14 is `not in source`.
+Why:
+- The Set Aside box is blank, so it adds nothing. The text states an
+  intention, so A06 quotes it whole, "intends" and "if" intact. It is not
+  shortened to "HUBZone".
+- A02 keeps the notice's own words; the notice is not relabeled as another
+  type.
+- A10 lists each contact's details in the order of its Source blocks. Role
+  titles ("Contracting Officer") stay in the quote, not as values.
+- A12's bare "5" means nothing without its label, so the value keeps the
+  label and adds no unit.
+- Market research states no evaluation basis, so A14 is `not in source`.
 
 ---
 
@@ -126,5 +152,6 @@ drops something that was. Each one fails `verify.py`.
 | Paraphrased requirement | `Mow weekly in season.` | the full sentence, word for word |
 | Dropped requirement | a "should" sentence left out as "advisory" | every trigger sentence gets a row |
 | Invented numbering | `Ref: 3.1` when the input prints no number | `Ref: -` |
-| Filled a blank | `Value: Full and open` for an empty SET-ASIDE box | `not in source` |
+| Filled a blank | `Value: Full and open` for an empty Set Aside box | `not in source` |
+| Pointer as a place | `Value: See Attachment 1` for place of performance | the place Attachment 1 gives, or `not in source` |
 | Added advice | "Recommend bidding; low competition." | nothing; not in the schema |

@@ -26,12 +26,16 @@ Matching tolerances (the only ones; both sides get the same treatment):
     all dash characters made '-'
   - '!' between two letters read as 'ff' (some PDF fonts lose the ff
     ligature on extraction: 'o!ice' is 'office')
-  - all whitespace, hyphens, bullet characters and the Markdown characters
-    * _ ` \\ ignored
+  - all whitespace, bullet characters and the Markdown characters * _ ` \\
+    ignored. Hyphens are NOT ignored: '404-273-1268' does not match
+    '4042731268'
+  - a hyphen at the end of a line in the source may be read either way
+    (kept, or dropped as a word-wrap hyphen), each one independently;
+    nowhere else
   - repeated page headers/footers and bare page numbers removed at page edges
     (quotes are also checked against the unstripped text)
   - a quote may be split into fragments, one per '> ' line; each fragment
-    must match exactly and all must sit within 2,500 characters of each
+    must match exactly and all must sit within 1,500 characters of each
     other on the cited pages (form labels and their values)
   - for a [visual] mark only, the label's words may be split across form
     lines; each word must be found near the others
@@ -61,15 +65,41 @@ C_KINDS = {"NOT SUPPLIED", "UNREADABLE", "PIPE REPLACED", "NONE"}
 
 
 # ---------------------------------------------------------------- matching
-def normalize(s):
+def _fold(s):
     s = unicodedata.normalize("NFKC", s)
     s = s.translate(str.maketrans({
-        "‘": "'", "’": "'", "“": '"', "”": '"',
-        "–": "-", "—": "-", "−": "-", "‐": "-",
-        "‑": "-", " ": " ",
+        "\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"',
+        "\u2013": "-", "\u2014": "-", "\u2212": "-", "\u2010": "-",
+        "\u2011": "-", "\u00a0": " ",
     }))
-    s = re.sub(r"(?<=[A-Za-z])!(?=[A-Za-z])", "ff", s)
-    return re.sub(r"[\s\-*_`\\\u2022\u25aa\u25cf\uf0b7]+", "", s)
+    return re.sub(r"(?<=[A-Za-z])!(?=[A-Za-z])", "ff", s)
+
+
+def normalize(s):
+    """Strict key: whitespace, bullets and Markdown marks ignored; hyphens KEPT."""
+    return re.sub(r"[\s*_`\\\u2022\u25aa\u25cf\uf0b7]+", "", _fold(s))
+
+
+WRAP = "\x01"   # stands for a hyphen at a line end: may be read as '-' or as nothing
+
+
+def marked(s):
+    """Normalized source text with every line-end hyphen replaced by WRAP."""
+    # A wrap hyphen hangs off a word (or an email's '.', '@', '/'); a dash
+    # with a space before it is punctuation and always counts.
+    return normalize(re.sub(r"(?<=[\w.@/])-[ \t]*\n\s*", WRAP, _fold(s)))
+
+
+def pattern(q):
+    """Regex for a normalized quote against marked() text: a WRAP in the
+    source may stand for one of the quote's hyphens or for nothing."""
+    parts = ["(?:-|\x01)" if c == "-" else re.escape(c) for c in q]
+    return re.compile("\x01?".join(parts))
+
+
+def loose(s):
+    """Coverage key only: hyphens ignored too. Never used to check a quote."""
+    return normalize(s).replace("-", "")
 
 
 def read_blocks(kind):
@@ -106,10 +136,12 @@ def clean_pages(pages):
 class Source:
     """One input file: text per page, in several extraction variants.
 
-    PDF variants: layout and plain extraction, each with and without page
-    header/footer removal. A quote passes if it is found in any variant.
+    PDF variants: layout, raw and default extraction, each with and without
+    page header/footer removal. A quote passes if it is found in any variant.
+    Known limit: the default mode drops a hyphen or dash at a line end, so a
+    dash printed at the very end of a PDF line cannot be proven either way.
     """
-    WINDOW = 2500   # max spread, in normalized characters, of one quote's fragments
+    WINDOW = 1500   # max spread, in normalized characters, of one quote's fragments
 
     def __init__(self, path):
         self.name = path.name
@@ -118,18 +150,18 @@ class Source:
             pages = extract.pdf_pages(path)
             n = max(p["page"] for p in pages)
             self.variants = []
-            for v in range(2):
+            for v in range(3):
                 bypage = {p["page"]: p["texts"][v] for p in pages}
                 seq = [bypage.get(i, "") for i in range(1, n + 1)]
                 self.variants.append(clean_pages(seq))
-            for v in range(2):
+            for v in range(3):
                 bypage = {p["page"]: p["texts"][v] for p in pages}
                 self.variants.append([bypage.get(i, "") for i in range(1, n + 1)])
         else:
             self.kind = "docx"
             self.variants = [[extract.docx_text(path)]]
-        self.norm = [[normalize(p) for p in var] for var in self.variants]
-        self.full = ["".join(var) for var in self.norm]
+        self._cache = {}
+        self.full = [marked("\n".join(var)) for var in self.variants]
 
     def npages(self):
         return len(self.variants[0])
@@ -141,17 +173,24 @@ class Source:
         return [("ok", (max(a, 1), min(b, self.npages()))),
                 ("near", (max(a - 1, 1), min(b + 1, self.npages())))]
 
+    def _hay(self, vi, rng):
+        key = (vi, rng)
+        if key not in self._cache:
+            var = self.variants[vi]
+            self._cache[key] = marked("\n".join(var[rng[0] - 1:rng[1]]))
+        return self._cache[key]
+
     @staticmethod
-    def _together(hay, frags, window):
+    def _together(hay, pats, window):
         """True if every fragment occurs in hay, all within `window` chars."""
         occ = []
-        for f in frags:
-            pos = [m.start() for m in re.finditer(re.escape(f), hay)]
+        for p in pats:
+            pos = [m.start() for m in p.finditer(hay)]
             if not pos:
                 return False
-            occ.append((pos, len(f)))
-        for p0 in occ[0][0]:
-            if all(any(abs(p - p0) <= window for p in pos) for pos, _ in occ[1:]):
+            occ.append(pos)
+        for p0 in occ[0]:
+            if all(any(abs(p - p0) <= window for p in pos) for pos in occ[1:]):
                 return True
         return False
 
@@ -160,21 +199,21 @@ class Source:
         return self.find_frags([text], pages)
 
     def find_frags(self, frags, pages=None):
-        """Each fragment must occur verbatim; all within WINDOW of each other."""
-        fr = [normalize(f) for f in frags if normalize(f)]
-        if not fr:
+        """Each fragment must occur exactly; all within WINDOW of each other."""
+        pats = [pattern(normalize(f)) for f in frags if normalize(f)]
+        if not pats:
             return "missing"
         for status, rng in self._ranges(pages):
-            for var in self.norm:
-                hay = "".join(var) if rng is None else "".join(var[rng[0] - 1:rng[1]])
-                if self._together(hay, fr, self.WINDOW):
+            for vi in range(len(self.variants)):
+                hay = self.full[vi] if rng is None else self._hay(vi, rng)
+                if self._together(hay, pats, self.WINDOW):
                     return status
-        if any(self._together(f, fr, self.WINDOW) for f in self.full):
+        if any(self._together(f, pats, self.WINDOW) for f in self.full):
             return "elsewhere"
         return "missing"
 
     def coverage_text(self):
-        """Plain extraction for PDF (better reading order), headers removed."""
+        """Raw extraction for PDF (keeps line-end hyphens), headers removed."""
         var = self.variants[1] if self.kind == "pdf" else self.variants[0]
         return "\n".join(var)
 
@@ -443,7 +482,7 @@ def parse_part_b(block, files, rep):
                 d = clause_by_file.setdefault(f.name, {})
                 d[cm.group(1)] = d.get(cm.group(1), 0) + 1
         else:
-            req_by_file.setdefault(f.name, []).append(normalize(text))
+            req_by_file.setdefault(f.name, []).append(loose(text))
     # coverage: nothing dropped
     dropped = 0
     for f in files.values():
@@ -464,13 +503,13 @@ def parse_part_b(block, files, rep):
         # they appear in the input (so one row cannot cover two sentences).
         need, seen = {}, {}
         for _, _, rk in wins:
-            k = normalize(rk); need[k] = need.get(k, 0) + 1
+            k = loose(rk); need[k] = need.get(k, 0) + 1
         for k in need:
             seen[k] = sum(r.count(k) for r in reqs)
         for pos, window, rk in wins:
-            if any(normalize(window) in r for r in reqs):
+            if any(loose(window) in r for r in reqs):
                 continue
-            k = normalize(rk)
+            k = loose(rk)
             if seen[k] >= need[k]:
                 continue
             dropped += 1

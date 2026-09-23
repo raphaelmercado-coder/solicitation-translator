@@ -108,12 +108,13 @@ Value: not in source
 ### A06 Set-aside
 Value: CONFLICT
 Source: F1 p.1 [visual]
-Reads: UNRESTRICTED
+Reads: HUBZONE SMALL BUSINESS
 Mark: marked
-> 10. THIS ACQUISITION IS UNRESTRICTED OR SET ASIDE
+> SET-ASIDE TYPE:
+> HUBZONE SMALL BUSINESS
 Source: F1 p.3
-Reads: 100% set-aside for small business
-> This acquisition is a 100% set-aside for small business concerns.
+Reads: full and open competition
+> This requirement will be competed under full and open competition.
 ```
 
 - Use `CONFLICT` only when two places in the input state the item in ways
@@ -145,7 +146,7 @@ extraction loses those marks, so a quote cannot prove them.
 | ID | Kind | Source | Ref | Requirement | Owner |
 |---|---|---|---|---|---|
 | B001 | REQ | F2 p.1 | C.2.1 | The Contractor shall mow all turf areas weekly between April 1 and October 31. | [HUMAN] |
-| B002 | CLAUSE | F1 p.5 | - | 52.203-17 Contractor Employee Whistleblower Rights. (NOV 2023) | [HUMAN] |
+| B002 | CLAUSE | F1 p.8 | - | 52.237-2 Protection of Government Buildings, Equipment, and Vegetation. (APR 1984) | [HUMAN] |
 ```
 
 - One row per requirement sentence, in the order they appear in the input,

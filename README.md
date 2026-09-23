@@ -23,6 +23,12 @@ and one missed requirement can get a bid thrown out.
 2. Paste this into the project's custom instructions:
    `You are the Solicitation Translator. Read identity.md, then follow rules.md exactly.`
 3. In a chat, attach the notice's files and say **"Run the translator."**
+4. Save the reply as a `.md` file. If the reply stops at
+   `CONTINUED: reply "continue" ...`, send "continue" and paste each part
+   into the same file in order. The `CONTINUED` lines can stay; the checker
+   skips them.
+
+The runs in this repo were made with Claude Opus 5.5.
 
 **What to feed it:** all the files of one notice, as **text-based PDF or
 .docx**:
@@ -42,10 +48,19 @@ change after you run it. Save it as a PDF.
 | **B. Compliance matrix** | One row per requirement sentence (anything with shall / must / should / required / prohibited ...), word for word, with page, paragraph number and a blank `[HUMAN]` owner column. Standard FAR clauses get one row each, by number and title. |
 | **C. Not mapped** | Documents the notice names that weren't in your files (attachments, wage determinations, forms), unreadable pages, and which fields came up empty or in conflict. |
 
-Long notices: after 80 matrix rows it stops and asks you to reply
-"continue". Join the replies into one file.
+**How to read it:**
+- **File numbers:** F1, F2 ... are your files, in the order you attached
+  them, listed at the top.
+- **Values and quotes:** each `Value:` is copied from the notice. The `> `
+  lines under `Source:` are the notice's own words it came from. A PDF
+  source gives the page (`p.3`); a .docx source gives the nearest heading,
+  since Word files have no fixed pages.
+- **Conflicts:** `CONFLICT` means two places disagree. Each gets a `Reads:`
+  line with what it says, and the translator doesn't pick.
+- **Checkboxes:** `[visual]` with `Mark: marked` means the fact is a
+  checkbox, which only the page image shows.
 
-A real excerpt (BLM janitorial RFQ, `runs/blm-janitorial/run3-output.md`):
+A real excerpt (BLM janitorial RFQ, `runs/blm-janitorial/run4-output.md`):
 
 ```
 ### A06 Set-aside
@@ -86,10 +101,24 @@ meeting, that's the most important line in the document.
 ## Check it
 
 `tests/verify.py` checks an output against the contract and the original
-files. It needs Python 3, `pdftotext` (poppler-utils) and `python-docx`.
+files. It needs Python 3, `pdftotext` and `python-docx`:
 
 ```
-python3 tests/verify.py runs/blm-janitorial/run3-output.md inputs/blm-janitorial
+pip install python-docx
+brew install poppler          # macOS;  on Linux: apt install poppler-utils
+```
+
+Check a shipped run:
+
+```
+python3 tests/verify.py runs/blm-janitorial/run4-output.md inputs/blm-janitorial
+```
+
+To check your own run, make a folder holding exactly the files you
+attached, with the same names, and point the checker at it:
+
+```
+python3 tests/verify.py my-intake.md my-notice-folder/
 ```
 
 It fails the output when:
@@ -100,14 +129,22 @@ It fails the output when:
 - any trigger sentence or clause heading in the input has no row;
 - Part C disagrees with Part A.
 
-It lists every checkbox mark for you to confirm by eye. Its only
-tolerances (whitespace, hyphens, curly quotes, one PDF font quirk) are
-listed at the top of the file.
+It ends with a **CHECK BY EYE** list: every checkbox the output relies on.
+Open the cited page and confirm the X is in the box named. Its only
+tolerances are listed at the top of `verify.py`:
+- whitespace;
+- curly quotes;
+- word-wrap hyphens at line ends;
+- one PDF font quirk.
 
-`tests/selftest.py` plants 13 known errors in passing outputs and confirms
-the checker catches every one: converted time zone, respelled name,
-invented deadline with a fake quote, dropped requirement, paraphrase, and
-others. Results: `runs/selftest.txt`.
+Every other character counts, hyphens included: `404-273-1268` does not
+match `4042731268`.
+
+`tests/selftest.py` plants 16 known errors in passing outputs and confirms
+the checker catches every one. The planted errors include a converted time
+zone, a respelled name, an invented deadline with a fake quote, a dropped
+requirement, a paraphrase, and a reformatted phone number. Run it with
+`python3 tests/selftest.py`; saved results are in `runs/selftest.txt`.
 
 **What the checker cannot catch:** a value placed in the wrong field, a
 conflict the translator never noticed, and whether a checkbox is really
@@ -149,7 +186,7 @@ tests/               kept apart from translator/ so the translator never sees th
   verify.py          the checker
   selftest.py        plants errors, proves the checker fails
   extract.py         the text extraction verify.py uses
-  fixtures/          the 13 planted-error outputs
+  fixtures/          the 16 planted-error outputs
 runs/                every run's output and checker result, predictions, log
 ```
 

@@ -1,43 +1,42 @@
 #!/usr/bin/env python3
 """Turn every input file into checkable source text for verify.py.
 
-Usage:  python3 tests/extract.py            (all cases under inputs/)
+verify.py imports this. Run it directly to see what the checker sees:
+  python3 tests/extract.py inputs/gsa-lease/Lease_SAM.pdf
 
-Writes tests/source/<case>/<file name>.json:
-  {"file": "...", "kind": "pdf"|"docx",
-   "pages": [{"page": 1, "texts": ["<layout text>", "<raw text>"]}, ...]}
-
-PDFs get two extractions per page (pdftotext -layout and plain), because
-forms read correctly in one and multi-column web pages in the other. A quote
-passes if it matches either. A .docx has no pages; it is stored as page 0.
+PDFs get three extractions per page (pdftotext -layout, -raw and default),
+because forms read correctly in one and multi-column web pages in another.
+A quote passes if it matches any of them. A .docx has no pages; it is stored as page 0.
 
 This script only extracts. It never cleans, fixes or rewords anything; the
 tolerances live in verify.py's normalize() where a reader can see them.
 Requires: poppler-utils (pdftotext), python-docx.
 """
-import json
 import pathlib
 import subprocess
 import sys
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-INPUTS = ROOT / "inputs"
-OUT = ROOT / "tests" / "source"
 
 
 def pdf_pages(path):
     layout = subprocess.run(["pdftotext", "-layout", str(path), "-"],
                             capture_output=True, text=True, check=True).stdout
-    raw = subprocess.run(["pdftotext", str(path), "-"],
+    # -raw keeps content-stream order and, unlike the default mode, does not
+    # silently drop hyphens at line ends (it keeps "531120 -" and "multi-").
+    raw = subprocess.run(["pdftotext", "-raw", str(path), "-"],
                          capture_output=True, text=True, check=True).stdout
-    lp, rp = layout.split("\f"), raw.split("\f")
-    n = max(len(lp), len(rp))
+    # Default mode reads some form blocks in the cleanest order, but it drops
+    # hyphens at line ends; verify.py only trusts it where the others agree
+    # on hyphens (see verify.py, "plain").
+    plain = subprocess.run(["pdftotext", str(path), "-"],
+                           capture_output=True, text=True, check=True).stdout
+    sets = [x.split("\f") for x in (layout, raw, plain)]
+    n = max(len(x) for x in sets)
     pages = []
     for i in range(n):
-        a = lp[i] if i < len(lp) else ""
-        b = rp[i] if i < len(rp) else ""
-        if a.strip() or b.strip():
-            pages.append({"page": i + 1, "texts": [a, b]})
+        texts = [x[i] if i < len(x) else "" for x in sets]
+        if any(t.strip() for t in texts):
+            pages.append({"page": i + 1, "texts": texts})
     return pages
 
 
@@ -64,23 +63,15 @@ def docx_text(path):
 
 
 def main():
-    cases = [p for p in sorted(INPUTS.iterdir()) if p.is_dir()]
-    for case in cases:
-        dest = OUT / case.name
-        dest.mkdir(parents=True, exist_ok=True)
-        for f in sorted(case.iterdir()):
-            if f.suffix.lower() == ".pdf":
-                rec = {"file": f.name, "kind": "pdf", "pages": pdf_pages(f)}
-            elif f.suffix.lower() == ".docx":
-                t = docx_text(f)
-                rec = {"file": f.name, "kind": "docx",
-                       "pages": [{"page": 0, "texts": [t]}]}
-            else:
-                print(f"skip {f} (not .pdf or .docx)", file=sys.stderr)
-                continue
-            (dest / (f.name + ".json")).write_text(json.dumps(rec, indent=1))
-            chars = sum(len(p["texts"][0]) for p in rec["pages"])
-            print(f"{case.name}/{f.name}: {len(rec['pages'])} page(s), {chars} chars")
+    if len(sys.argv) != 2:
+        print(__doc__); sys.exit(2)
+    f = pathlib.Path(sys.argv[1])
+    if f.suffix.lower() == ".pdf":
+        for p in pdf_pages(f):
+            print(f"===== page {p['page']} (layout) =====")
+            print(p["texts"][0])
+    else:
+        print(docx_text(f))
 
 
 if __name__ == "__main__":
