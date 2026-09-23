@@ -440,7 +440,8 @@ def parse_part_b(block, files, rep):
             if not cm:
                 rep.fail("B-CLAUSE", f"{rid}: CLAUSE row must start with the clause number")
             else:
-                clause_by_file.setdefault(f.name, set()).add(cm.group(1))
+                d = clause_by_file.setdefault(f.name, {})
+                d[cm.group(1)] = d.get(cm.group(1), 0) + 1
         else:
             req_by_file.setdefault(f.name, []).append(normalize(text))
     # coverage: nothing dropped
@@ -449,10 +450,12 @@ def parse_part_b(block, files, rep):
         text = f.coverage_text()
         heads, cspans = clause_spans(text, head_re, sec_re)
         skip = cspans + exempt_spans(text, exempt)
-        have = set(clause_by_file.get(f.name, set()))
+        have = clause_by_file.get(f.name, {})
         for h in sorted(set(heads)):
-            if h not in have:
-                rep.fail("B-CLAUSE-DROPPED", f"clause {h} in {f.name} has no CLAUSE row")
+            n_in, n_out = heads.count(h), have.get(h, 0)
+            if n_out < n_in:
+                rep.fail("B-CLAUSE-DROPPED",
+                         f"clause {h} appears {n_in} time(s) in {f.name}, {n_out} CLAUSE row(s)")
         reqs = req_by_file.get(f.name, [])
         wins = trigger_windows(text, triggers, skip, f.kind == "docx")
         # Fallback for windows whose left words are a heading, list number or

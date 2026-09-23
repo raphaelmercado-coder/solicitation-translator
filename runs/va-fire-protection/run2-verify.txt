@@ -1,0 +1,11 @@
+verify.py  runs/va-fire-protection/run2-output.md  against  inputs/va-fire-protection
+Part A: 12 filled, 2 not in source, 0 conflict
+Part B: 150 rows, 0 requirement(s) dropped
+Part C: 8 rows
+FAIL QUOTE: B044a: not in 36C24126Q0831.docx: "DEVICE / ACTIVITY / FREQUENCY"
+FAIL QUOTE: B044b: not in 36C24126Q0831.docx: "Audio Visual Devices; Batteries; Door Holder/Release; Magnetic Locks; Power Supplies (FCPS); Pull Stations; Smoke Detectors / 1st Quarter – "
+FAIL QUOTE: B044c: not in 36C24126Q0831.docx: "Air Handling Units (Shutdown); Dampers (Smoke); Duct Smokes; Magnetic Locks; Smoke Detectors / 2nd Quarter – March; BLUE / Annual"
+FAIL QUOTE: B044d: not in 36C24126Q0831.docx: "Battery Discharge Testing (FACP); Elevator Recall/Shunt Trip; Power Supplies; Smoke Detectors (Electrical Rooms) / 3rd Quarter – June; YELLO"
+FAIL QUOTE: B044e: not in 36C24126Q0831.docx: "All Audio Messages; Batteries (AV/DAA); Fire Fighter Phones; Smoke Detectors / 4th Quarter – September; GREEN / Annual"
+FAIL QUOTE: B044f: not in 36C24126Q0831.docx: "Master Boxes / 1st, 2nd, 3rd, & 4th Quarters / Quarterly"
+RESULT: FAIL (6 failure(s), 0 warning(s))

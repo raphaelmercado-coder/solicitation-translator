@@ -1,0 +1,8 @@
+verify.py  runs/blm-janitorial/run2-output.md  against  inputs/blm-janitorial
+Part A: 11 filled, 0 not in source, 3 conflict
+Part B: 176 rows, 0 requirement(s) dropped
+Part C: 14 rows
+CHECK BY EYE (visual marks the text cannot prove):
+  A02 F1 p.1 [visual]: "14. METHOD OF SOLICITATION REQUEST FOR QUOTE (RFQ)" -> marked
+  A06 F1 p.1 [visual]: "10. THIS ACQUISITION IS UNRESTRICTED OR" -> marked
+RESULT: PASS (0 failure(s), 0 warning(s))

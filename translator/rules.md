@@ -61,6 +61,11 @@ For each of the fourteen fields, in order:
 - A hyphen that appears only because a word wrapped at the end of a line
   (narrow web pages do this constantly) is not part of the word: write the
   word whole. A hyphen in the middle of a line is part of the text: keep it.
+- Join pieces across a line break only when they are plainly one token
+  (a word, an email, an ID). If joining would make something that is not
+  printed anywhere as a whole and could be read more than one way (a phone
+  number with a stray fragment before it), give each printed piece its own
+  `Value:` line instead.
 - Numbers and money: as printed, with the input's commas, units and
   symbols. Never add, total or convert.
 - Abbreviations and truncations stay as printed.
@@ -82,8 +87,9 @@ For each of the fourteen fields, in order:
    sentence is one row, and each list item under it is its own row with the
    parent's ID plus a letter (B014a, B014b ...), trigger or not. A list
    item is one row even when it holds several sentences; copy the item
-   whole. A table under such a sentence: one row per table row, cells in
-   order.
+   whole. A table under such a sentence: one row per table row (not the
+   header row), the cells' text in order separated by a single space. Add
+   no separators, slashes or semicolons of your own.
 4. Every clause heading (as defined in `trigger-phrases.md`) becomes one
    `CLAUSE` row: number and title as printed. The clause's body sentences do
    not get rows.
