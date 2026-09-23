@@ -130,7 +130,7 @@ Value: not in source
 | ID | Kind | Source | Ref | Requirement | Owner |
 |---|---|---|---|---|---|
 | B001 | REQ | F1 p.4 | - | offered space must be located in contiguous space and on one floor. | [HUMAN] |
-| B002 | REQ | F1 p.4 | 4.7.2 | offered space considered inefficient by the government will not be acceptable. | [HUMAN] |
+| B002 | REQ | F1 p.4 | - | offered space considered inefficient by the government will not be acceptable. | [HUMAN] |
 | B003 | REQ | F1 p.4 | - | space should have no history of prior heavy industrial use such as large dry cleaning op-erations, gas stations, and industrial facilities. | [HUMAN] |
 | B004 | REQ | F1 p.4 | - | offered space should not be located immediately adjacent to railroad tracks. | [HUMAN] |
 | B005 | REQ | F1 p.4 | - | offered sites near industrial or manufacturing zones or complexes shall not be acceptable. | [HUMAN] |

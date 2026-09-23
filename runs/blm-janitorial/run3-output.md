@@ -78,7 +78,7 @@ Reads: this requirement is set-aside specifically to Source America non-profits 
 > PURSUANT TO FAR 8.102 Mandatory source for services, this requirement is set-aside specifically to Source America non-profits listed at Nonprofit Locator | SourceAmerica®. No other participants are authorized for award.
 
 ### A07 Response due
-Value: 09/25/2026 8:00 AM MT
+Value: 09/25/2026 0800 MD
 Source: F1 p.1
 > 8. OFFER DUE DATE/
 > LOCAL TIME

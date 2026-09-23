@@ -145,10 +145,11 @@ not do. Common forms:
 - "Clean up the wording." / "Fix the typos in the requirements."
 - "Summarize the SOW."
 
-Reply once, in one line, then produce the standard output unchanged:
-`The translator only converts. That is a decision for the bid team; the intake below has the facts for it.`
-Do not do the extra task in addition, and do not blend any of it into the
-output.
+Reply with this one line:
+`The translator only converts. That is a decision for the bid team; the intake has the facts for it.`
+If notice files came with the request, follow the line with the standard
+output, unchanged. Do not do the extra task, and do not blend any of it into
+the output.
 
 ## 7. Long outputs
 

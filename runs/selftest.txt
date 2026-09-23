@@ -1,0 +1,29 @@
+base  gsa-lease        verify=PASS  (expected PASS)
+base  blm-janitorial   verify=PASS  (expected PASS)
+CAUGHT  01-converted-timezone          time zone 'MD' expanded to 'MDT' in both value and quote
+        FAIL QUOTE: A07 source 1: not in Sol_140L1726Q0071.pdf: "8. OFFER DUE DATE/ / LOCAL TIME / 09/25/2026 0800 MDT"
+CAUGHT  02-value-not-in-quote          value reformatted; quote left as printed
+        FAIL A-VALUE: A07: Value '09/25/2026 8:00 AM MT' is not inside any of its quotes
+CAUGHT  03-respelled-name              contact name respelled everywhere it appears
+        FAIL QUOTE: A10 source 1: not in Lease_SAM.pdf: "Primary Point of Contact / Melissa Hine - PRAA-C / Email / melissa.hein@gsa.gov / Phone Number / 212-
+CAUGHT  04-filled-a-blank              questions deadline invented, with a made-up quote to back it
+        FAIL QUOTE: A09 source 1: not in Lease_SAM.pdf: "Questions due 10/07/2026"
+CAUGHT  05-dropped-requirement         one requirement row deleted
+        FAIL B-DROPPED: Lease_SAM.pdf: no REQ row contains "zones or complexes shall not be acceptable"
+CAUGHT  06-paraphrased-requirement     requirement reworded instead of copied
+        FAIL QUOTE: B001: not in Lease_SAM.pdf: "Space must be contiguous and on a single floor."
+CAUGHT  07-invented-ref                paragraph number created where the input prints none
+        FAIL B-REF: B002: Ref '4.7.2' is not printed in Lease_SAM.pdf
+CAUGHT  08-shape-drift                 field heading reworded
+        FAIL SHAPE: Part A fields must be exactly 14 in order; got ['A01 Notice number', 'A02 Type of notice', 'A03 Title', 'A04 Issuing office', 'A05 NAICS c
+CAUGHT  09-part-c-disagrees            Part C summary omits a field Part A marked not in source
+        FAIL C-LIST: 'Fields not in source' says ['A08', 'A13', 'A14'], Part A has ['A08', 'A09', 'A13', 'A14']
+CAUGHT  10-dropped-clause              one CLAUSE row deleted
+        FAIL B-CLAUSE-DROPPED: clause 52.252-2 appears 2 time(s) in Sol_140L1726Q0071.pdf, 1 CLAUSE row(s)
+CAUGHT  11-resolved-relative-date      'within seven calendar days of issuance' turned into a date
+        FAIL A-VALUE: A09: Value '09/30/2026' is not inside any of its quotes
+CAUGHT  12-added-advice                a recommendation appended after Part C
+        FAIL SHAPE: Part C: unexpected line 'Recommendation: bid. Low competition expected.'
+CAUGHT  13-conflict-missing-reads      a CONFLICT source with no Reads line
+        FAIL A-CONFLICT: A01: every Source under CONFLICT needs a Reads line
+SELFTEST: PASS

@@ -88,7 +88,6 @@ Source: F1 p.7
 > melissa.hein@gsa.gov
 > Phone Number
 > 212-326-1064
-Source: F1 p.7
 > Alternative Point of Contact
 > Runako Spencer
 > Email
@@ -97,15 +96,12 @@ Source: F1 p.7
 > 4042731268
 
 ### A11 Place of performance
-Value: Brunswick, GA
-Value: State: Georgia
-Value: City: BRUNSWICK
+Value: Georgia
+Value: BRUNSWICK
 Value: -North: Glynco Parkway
 Value: -East: Hwy 17
 Value: -South: 1st Street
 Value: -West: Hwy 341 to I-95
-Source: F1 p.1
-> General Services Administration (GSA) seeks to lease office space in Brunswick, GA
 Source: F1 p.3
 > State: Georgia
 > City: BRUNSWICK
@@ -143,7 +139,7 @@ Value: not in source
 | B006 | REQ | F1 p.4 | - | offered space shall be located not more than the equivalent of ¼ mile from a primary or secondary street serving the office. | [HUMAN] |
 | B007 | REQ | F1 p.4 | - | offered space must meet the access requirements as outlined by Agency. | [HUMAN] |
 | B008 | REQ | F1 p.4-5 | - | the route from the primary or secondary street shall be direct. | [HUMAN] |
-| B009 | REQ | F1 p.5 | - | sites located on a high-traffic roadway or multilane thoroughfare must have traffic signals within two blocks to provide safe access. | [HUMAN] |
+| B009 | REQ | F1 p.5 | - | sites located on a high-traffic roadway or multi-lane thoroughfare must have traffic signals within two blocks to provide safe access. | [HUMAN] |
 | B010 | REQ | F1 p.5 | - | sites which are located directly on or near a roadway which presents a hazard will not be considered. | [HUMAN] |
 | B011 | REQ | F1 p.5 | - | offered buildings located near bars, nightclubs, liquor stores, dry cleaners, beauty salons, bingo parlors, or other businesses that produce large fluctuations in traffic or smells detectable within the office space will not be considered. | [HUMAN] |
 | B012 | REQ | F1 p.5 | - | parking-to-square-foot ratio available on site shall at least meet current local code requirements, or, in absence of a local code requirement, on-site parking shall be avail-able at a ratio of 1 space for every 200 rsf of government-demised area. | [HUMAN] |

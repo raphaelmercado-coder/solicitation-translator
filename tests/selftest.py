@@ -18,8 +18,8 @@ FIX = ROOT / "tests" / "fixtures"
 VERIFY = ROOT / "tests" / "verify.py"
 
 BASES = {
-    "gsa-lease": ROOT / "runs" / "gsa-lease" / "final-output.md",
-    "blm-janitorial": ROOT / "runs" / "blm-janitorial" / "final-output.md",
+    "gsa-lease": ROOT / "runs" / "gsa-lease" / "run3-output.md",
+    "blm-janitorial": ROOT / "runs" / "blm-janitorial" / "run3-output.md",
 }
 
 
