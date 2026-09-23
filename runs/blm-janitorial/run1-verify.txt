@@ -1,0 +1,24 @@
+verify.py  runs/blm-janitorial/run1-output.md  against  inputs/blm-janitorial
+Part A: 11 filled, 0 not in source, 3 conflict
+Part B: 186 rows, 7 requirement(s) dropped
+Part C: 14 rows
+FAIL QUOTE: A01 source 2: not in A04_PWS_-_SWD_Montrose_Janitorial.pdf: "140L5424R0001 SWD Montrose Complex Janitorial"
+FAIL QUOTE: A02 source 1: not in Sol_140L1726Q0071.pdf: "14. METHOD OF SOLICITATION REQUEST FOR QUOTE (RFQ)"
+FAIL QUOTE: A04 source 1: not in Sol_140L1726Q0071.pdf: "9. ISSUED BY CODE LRA COLORADO STATE OFF Denver Federal Center Building 40 Lakewood CO 80225"
+FAIL QUOTE: A05 source 1: not in Sol_140L1726Q0071.pdf: "NORTH AMERICAN INDUSTRY CLASSIFICATION STANDARD (NAICS): 561720 SIZE STANDARD: $22"
+FAIL QUOTE: A05 source 2: not in Sol_140L1726Q0071.pdf: "Administrative Codes 561720, Janitorial Services ($22)"
+FAIL QUOTE: A07 source 1: not in Sol_140L1726Q0071.pdf: "8. OFFER DUE DATE/ LOCAL TIME 09/25/2026 0800 MD"
+FAIL QUOTE: A10 source 1: not in Sol_140L1726Q0071.pdf: "7. FOR SOLICITATION INFORMATION CALL: a. NAME Lashondra Hubbard"
+FAIL QUOTE: A11 source 1: not in Sol_140L1726Q0071.pdf: "DELIVER TO: BLM-CO UNCOMPAHGRE FIELD OFFICE* 2465 S TOWNSEND AVE MONTROSE CO 81401 US"
+FAIL B-DROPPED: Sol_140L1726Q0071.pdf: no REQ row contains "Part 8 - Required Sources of Supplies and"
+FAIL B-DROPPED: Sol_140L1726Q0071.pdf: no REQ row contains "2021) Payment requests must be submitted electronically through"
+FAIL B-DROPPED: Sol_140L1726Q0071.pdf: no REQ row contains "(c) The Contractor must include the substance of"
+FAIL B-DROPPED: A04_PWS_-_SWD_Montrose_Janitorial.pdf: no REQ row contains "details how work will be evaluated , as stated in"
+FAIL B-DROPPED: A04_PWS_-_SWD_Montrose_Janitorial.pdf: no REQ row contains "4) All surfaces shall be clean with no"
+FAIL B-DROPPED: A04_PWS_-_SWD_Montrose_Janitorial.pdf: no REQ row contains "with the workmanship required under this contract"
+FAIL B-DROPPED: A04_PWS_-_SWD_Montrose_Janitorial.pdf: no REQ row contains "PERSONNEL The contractor shall inform all personnel working"
+CHECK BY EYE (visual marks the text cannot prove):
+  A02 F1 p.1 [visual]: "14. METHOD OF SOLICITATION REQUEST FOR QUOTE (RFQ)" -> marked
+  A06 F1 p.1 [visual]: "10. THIS ACQUISITION IS UNRESTRICTED OR SET ASIDE: % FOR:" -> marked
+  A13 F1 p.1 [visual]: "28. CONTRACTOR IS REQUIRED TO SIGN THIS DOCUMENT AND RETURN 1 COPIES TO ISSUING " -> marked
+RESULT: FAIL (15 failure(s), 0 warning(s))

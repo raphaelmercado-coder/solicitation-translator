@@ -42,7 +42,10 @@ For each of the fourteen fields, in order:
 4. **Not found:** `Value: not in source`. Nothing else under the heading.
    A printed label with an empty box or blank next to it is not found.
 5. The quote must contain the value. Quote enough of the surrounding line
-   that a reader can find it: the label and the value together.
+   that a reader can find it: the label and the value together. Each `> `
+   line must be an unbroken run of the input's text. On forms and web-page
+   grids, where the label and the value sit in separate boxes, put them on
+   separate `> ` lines. All `Value:` lines come before the first `Source:`.
 6. A fact that exists only as a mark on a form: tag the source `[visual]`,
    add `Mark: marked` or `Mark: not marked`, and quote the printed label.
 
@@ -55,6 +58,9 @@ For each of the fourteen fields, in order:
 - Names, emails, phone numbers: character for character. If an email is
   broken across lines in the input, join the pieces without adding or
   removing characters.
+- A hyphen that appears only because a word wrapped at the end of a line
+  (narrow web pages do this constantly) is not part of the word: write the
+  word whole. A hyphen in the middle of a line is part of the text: keep it.
 - Numbers and money: as printed, with the input's commas, units and
   symbols. Never add, total or convert.
 - Abbreviations and truncations stay as printed.
@@ -67,18 +73,26 @@ For each of the fourteen fields, in order:
 2. Every sentence that contains a trigger phrase from
    `reference/trigger-phrases.md` becomes one `REQ` row. Copy the whole
    sentence exactly. Do not merge two sentences into one row or split one
-   sentence into two rows.
+   sentence into two rows. This includes sentences that do not look like
+   obligations: a definition that contains "will be evaluated", a sentence
+   that names a regulation whose title contains "Required", a sentence
+   about what the Government will do that contains "required". The trigger
+   decides, not you.
 3. A requirement sentence ending in a colon that introduces a list: the
    sentence is one row, and each list item under it is its own row with the
-   parent's ID plus a letter (B014a, B014b ...), trigger or not.
+   parent's ID plus a letter (B014a, B014b ...), trigger or not. A list
+   item is one row even when it holds several sentences; copy the item
+   whole. A table under such a sentence: one row per table row, cells in
+   order.
 4. Every clause heading (as defined in `trigger-phrases.md`) becomes one
    `CLAUSE` row: number and title as printed. The clause's body sentences do
    not get rows.
 5. Skip exempt text (website navigation, banners, footers) listed in
    `trigger-phrases.md`.
-6. `Ref` is the paragraph number printed at the start of that paragraph or
-   item (`C.3.2.1`, `(b)`, `3)`), exactly as printed, or `-`. Never number
-   anything yourself. Gaps and odd numbering in the input stay as they are.
+6. `Ref` is the nearest paragraph or item number printed at or above the
+   sentence, in the item it belongs to (`C.3.2.1`, `(b)`, `3)`), exactly as
+   printed, or `-` if there is none. Never number anything yourself. Gaps
+   and odd numbering in the input stay as they are.
 7. Owner is always `[HUMAN]`.
 8. Leave the input's words alone even when they are wrong: repeated words,
    typos, stray spaces inside a word (write the word as it reads), and

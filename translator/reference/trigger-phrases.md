@@ -36,11 +36,11 @@ Solicitations carry standard FAR and agency clauses: pages of fixed text
 full of "shall" that is the same in every solicitation. Listing every
 sentence would bury the requirements that are specific to this job.
 
-A clause heading is a line that starts with a clause number followed by its
-title:
+A clause heading is a line that starts with a clause number (optionally
+prefixed `FAR`, `DFARS` or `VAAR`) followed by its title:
 
 ```clause-heading
-^\s*(?:52|552|852|1452)\.\d{3}-\d{1,3}\s+(?:[-–]\s+)?[A-Z][A-Za-z]
+^\s*(?:FAR\s+|DFARS\s+|VAAR\s+)?(?:52|552|852|1452)\.\d{3}-\d{1,3}\s+(?:[-–]\s+)?(?!AND\b|ARE\b|IS\b|OR\b)[A-Z][A-Za-z]
 ```
 
 - Every clause heading gets one `CLAUSE` row: the number and title exactly

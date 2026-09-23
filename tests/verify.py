@@ -29,6 +29,12 @@ Matching tolerances (the only ones; both sides get the same treatment):
   - all whitespace, hyphens, bullet characters and the Markdown characters
     * _ ` \\ ignored
   - repeated page headers/footers and bare page numbers removed at page edges
+    (quotes are also checked against the unstripped text)
+  - a quote may be split into fragments, one per '> ' line; each fragment
+    must match exactly and all must sit within 2,500 characters of each
+    other on the cited pages (form labels and their values)
+  - for a [visual] mark only, the label's words may be split across form
+    lines; each word must be found near the others
   Case is NOT ignored. Spelling is NOT ignored. Word order is NOT ignored.
 """
 import pathlib
@@ -98,7 +104,13 @@ def clean_pages(pages):
 
 
 class Source:
-    """One input file: cleaned text per page per extraction variant."""
+    """One input file: text per page, in several extraction variants.
+
+    PDF variants: layout and plain extraction, each with and without page
+    header/footer removal. A quote passes if it is found in any variant.
+    """
+    WINDOW = 2500   # max spread, in normalized characters, of one quote's fragments
+
     def __init__(self, path):
         self.name = path.name
         if path.suffix.lower() == ".pdf":
@@ -110,33 +122,59 @@ class Source:
                 bypage = {p["page"]: p["texts"][v] for p in pages}
                 seq = [bypage.get(i, "") for i in range(1, n + 1)]
                 self.variants.append(clean_pages(seq))
+            for v in range(2):
+                bypage = {p["page"]: p["texts"][v] for p in pages}
+                self.variants.append([bypage.get(i, "") for i in range(1, n + 1)])
         else:
             self.kind = "docx"
             self.variants = [[extract.docx_text(path)]]
         self.norm = [[normalize(p) for p in var] for var in self.variants]
-        self.full = [ "".join(var) for var in self.norm]
+        self.full = ["".join(var) for var in self.norm]
 
     def npages(self):
         return len(self.variants[0])
 
+    def _ranges(self, pages):
+        if self.kind != "pdf" or not pages:
+            return [("ok", None)]
+        a, b = pages
+        return [("ok", (max(a, 1), min(b, self.npages()))),
+                ("near", (max(a - 1, 1), min(b + 1, self.npages())))]
+
+    @staticmethod
+    def _together(hay, frags, window):
+        """True if every fragment occurs in hay, all within `window` chars."""
+        occ = []
+        for f in frags:
+            pos = [m.start() for m in re.finditer(re.escape(f), hay)]
+            if not pos:
+                return False
+            occ.append((pos, len(f)))
+        for p0 in occ[0][0]:
+            if all(any(abs(p - p0) <= window for p in pos) for pos, _ in occ[1:]):
+                return True
+        return False
+
     def find(self, text, pages=None):
-        """Return 'ok', 'elsewhere' (in file, not on cited pages) or 'missing'."""
-        t = normalize(text)
-        if not t:
+        """One contiguous run of text. 'ok', 'near', 'elsewhere' or 'missing'."""
+        return self.find_frags([text], pages)
+
+    def find_frags(self, frags, pages=None):
+        """Each fragment must occur verbatim; all within WINDOW of each other."""
+        fr = [normalize(f) for f in frags if normalize(f)]
+        if not fr:
             return "missing"
-        if self.kind == "pdf" and pages:
-            a, b = pages
-            for lo, hi in ((a, b), (a - 1, b + 1)):
-                lo, hi = max(lo, 1), min(hi, self.npages())
-                for var in self.norm:
-                    if t in "".join(var[lo - 1:hi]):
-                        return "ok" if (lo, hi) == (max(a, 1), min(b, self.npages())) else "near"
-        if any(t in f for f in self.full):
-            return "ok" if self.kind == "docx" or not pages else "elsewhere"
+        for status, rng in self._ranges(pages):
+            for var in self.norm:
+                hay = "".join(var) if rng is None else "".join(var[rng[0] - 1:rng[1]])
+                if self._together(hay, fr, self.WINDOW):
+                    return status
+        if any(self._together(f, fr, self.WINDOW) for f in self.full):
+            return "elsewhere"
         return "missing"
 
     def coverage_text(self):
-        """Primary extraction (raw for PDF), cleaned, pages joined."""
+        """Plain extraction for PDF (better reading order), headers removed."""
         var = self.variants[1] if self.kind == "pdf" else self.variants[0]
         return "\n".join(var)
 
@@ -172,13 +210,16 @@ def parse_loc(loc_text, files, rep, where):
     return f, pages, bool(m.group(3))
 
 
-def check_quote(f, pages, quote, rep, where):
-    r = f.find(quote, pages)
+def check_quote(f, pages, frags, rep, where):
+    if isinstance(frags, str):
+        frags = [frags]
+    r = f.find_frags(frags, pages)
     if r == "missing":
-        rep.fail("QUOTE", f"{where}: not in {f.name}: \"{quote[:120]}\"")
+        shown = " / ".join(frags)
+        rep.fail("QUOTE", f"{where}: not in {f.name}: \"{shown[:140]}\"")
         return False
     if r in ("near", "elsewhere"):
-        rep.warn("LOCATOR", f"{where}: quote found in {f.name} but not on the cited page(s)")
+        rep.warn("LOCATOR", f"{where}: found in {f.name} but not on the cited page(s)")
     return True
 
 
@@ -257,13 +298,19 @@ def parse_part_a(block, files, rep):
             if not q:
                 rep.fail("A-QUOTE", f"{where}: no quote"); continue
             if f:
-                check_quote(f, pages, q, rep, where)
+                if visual and f.find_frags(b["quote"], pages) == "missing":
+                    # Form labels wrap across grid lines; for a visual mark
+                    # accept the label's words, each found near the others.
+                    words = " ".join(b["quote"]).split()
+                    check_quote(f, pages, words, rep, where)
+                else:
+                    check_quote(f, pages, b["quote"], rep, where)
             if visual:
                 if b["mark"] not in ("marked", "not marked"):
                     rep.fail("A-VISUAL", f"{where}: [visual] needs 'Mark: marked' or 'Mark: not marked'")
                 rep.visual.append(f"{fid} {b['loc']}: \"{q[:80]}\" -> {b['mark']}")
-            quotes.append(normalize(q))
-            if b["reads"] is not None and normalize(b["reads"]) not in normalize(q):
+            quotes.append("".join(normalize(x) for x in b["quote"]))
+            if b["reads"] is not None and normalize(b["reads"]) not in quotes[-1]:
                 rep.fail("A-READS", f"{where}: Reads '{b['reads'][:80]}' is not inside its quote")
         if values == ["CONFLICT"]:
             status[fid] = "conflict"
@@ -309,7 +356,7 @@ def clause_spans(text, head_re, sec_re):
     heads, starts, stops = [], [], []
     for i, l in enumerate(lines):
         if re.match(head_re, l):
-            heads.append(re.match(r"\s*(\d+\.\d{3}-\d+)", l).group(1))
+            heads.append(re.search(r"(\d+\.\d{3}-\d+)", l).group(1))
             starts.append(offs[i])
         elif re.match(sec_re, l):
             stops.append(offs[i])
@@ -336,21 +383,24 @@ def exempt_spans(text, rules):
     return spans
 
 
-def trigger_windows(text, triggers, skip):
+def trigger_windows(text, triggers, skip, line_is_paragraph=False):
+    """For each trigger outside `skip`: (pos, window, right_key).
+
+    window    = up to 3 words before + trigger + up to 4 words after, clipped
+                to the sentence (and, for .docx, to the paragraph line).
+    right_key = trigger + up to 4 words after.
+    """
     pat = re.compile(r"\b(" + "|".join(re.escape(t) for t in triggers) + r")\b", re.I)
+    stop = r"[.!?;:]\s|\n\s*\n" + (r"|\n" if line_is_paragraph else "")
     out = []
     for m in pat.finditer(text):
         if any(a <= m.start() < b for a, b in skip):
             continue
-        # clip to the sentence: stop at . ! ? ; : or a blank line
-        left = text[max(0, m.start() - 200):m.start()]
-        left = re.split(r"[.!?;:]\s|\n\s*\n", left)[-1]
-        right = text[m.end():m.end() + 200]
-        right = re.split(r"[.!?;:](\s|$)|\n\s*\n", right)[0]
-        lw = left.split()[-3:]
-        rw = right.split()[:4]
-        window = " ".join(lw + [m.group(0)] + rw)
-        out.append((m.start(), window))
+        left = re.split(stop, text[max(0, m.start() - 200):m.start()])[-1]
+        right = re.split(r"[.!?;:](?:\s|$)|\n\s*\n" + (r"|\n" if line_is_paragraph else ""),
+                         text[m.end():m.end() + 200])[0]
+        lw, rw = left.split()[-3:], right.split()[:4]
+        out.append((m.start(), " ".join(lw + [m.group(0)] + rw), " ".join([m.group(0)] + rw)))
     return out
 
 
@@ -386,7 +436,7 @@ def parse_part_b(block, files, rep):
         if ref != "-" and f.find(ref) == "missing":
             rep.fail("B-REF", f"{rid}: Ref '{ref}' is not printed in {f.name}")
         if kind == "CLAUSE":
-            cm = re.match(r"\s*((?:52|552|852|1452)\.\d{3}-\d{1,3})\b", text)
+            cm = re.match(r"\s*(?:(?:FAR|DFARS|VAAR)\s+)?((?:52|552|852|1452)\.\d{3}-\d{1,3})\b", text)
             if not cm:
                 rep.fail("B-CLAUSE", f"{rid}: CLAUSE row must start with the clause number")
             else:
@@ -404,10 +454,24 @@ def parse_part_b(block, files, rep):
             if h not in have:
                 rep.fail("B-CLAUSE-DROPPED", f"clause {h} in {f.name} has no CLAUSE row")
         reqs = req_by_file.get(f.name, [])
-        for pos, window in trigger_windows(text, triggers, skip):
-            if not any(normalize(window) in r for r in reqs):
-                dropped += 1
-                rep.fail("B-DROPPED", f"{f.name}: no REQ row contains \"{window}\"")
+        wins = trigger_windows(text, triggers, skip, f.kind == "docx")
+        # Fallback for windows whose left words are a heading, list number or
+        # page furniture the row rightly leaves out: the trigger and the four
+        # words after it must appear in REQ rows at least as many times as
+        # they appear in the input (so one row cannot cover two sentences).
+        need, seen = {}, {}
+        for _, _, rk in wins:
+            k = normalize(rk); need[k] = need.get(k, 0) + 1
+        for k in need:
+            seen[k] = sum(r.count(k) for r in reqs)
+        for pos, window, rk in wins:
+            if any(normalize(window) in r for r in reqs):
+                continue
+            k = normalize(rk)
+            if seen[k] >= need[k]:
+                continue
+            dropped += 1
+            rep.fail("B-DROPPED", f"{f.name}: no REQ row contains \"{window}\"")
     return len(rows), dropped
 
 

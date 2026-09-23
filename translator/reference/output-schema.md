@@ -62,6 +62,8 @@ Source: F1 p.1
 > 8. OFFER DUE DATE/ LOCAL TIME 03/14/2027 1400 CT
 ```
 
+- Layout is fixed: all `Value:` lines first, then the `Source:` blocks.
+  Never put a `Value:` line after a `Source:` line.
 - `Value:` is copied word for word from the input. It is never reworded,
   reformatted, expanded or corrected. It must appear inside one of the
   field's quotes.
@@ -73,7 +75,20 @@ Source: F1 p.1
   .docx, the locator is the nearest heading or table label as printed, e.g.
   `Source: F1 DESCRIPTION`.
 - `> ` lines are the quote: the input's own words, copied exactly, long enough
-  to show the value in context. Several `> ` lines in a row are one quote.
+  to show the value in context.
+- Each `> ` line is one fragment and must be an exact, unbroken run of the
+  input's text. Continuous text goes on one `> ` line. On a form or a web
+  page grid, where a label and its value sit in separate boxes, put the label
+  on one `> ` line and the value on the next:
+
+  ```
+  Source: F1 p.1
+  > 8. OFFER DUE DATE/ LOCAL TIME
+  > 03/14/2027 1400 CT
+  ```
+
+  The value must sit inside a single fragment, or run across fragments in
+  order when the page wraps it (a number broken over two lines).
 - A field may have several `Source:` blocks, each followed by its own quote.
 
 ### Form 2: not in source

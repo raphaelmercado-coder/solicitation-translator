@@ -1,0 +1,8 @@
+verify.py  runs/va-fire-protection/run1-output.md  against  inputs/va-fire-protection
+Part A: 12 filled, 2 not in source, 0 conflict
+Part B: 148 rows, 1 requirement(s) dropped
+Part C: 7 rows
+FAIL QUOTE: A11 source 1: not in 36C24126Q0831.docx: "ADDRESS See SOW COUNTRY USA"
+FAIL QUOTE: A11 source 2: not in 36C24126Q0831.docx: "This is a full maintenance and service contract 24/7 at the Providence VA Medical Center located at 830 Chalkstone Avenu"
+FAIL B-DROPPED: 36C24126Q0831.docx: no REQ row contains "APPLICATIONS Extreme care should be taken regarding software"
+RESULT: FAIL (3 failure(s), 0 warning(s))

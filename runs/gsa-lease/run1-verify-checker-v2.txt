@@ -1,0 +1,14 @@
+verify.py  runs/gsa-lease/run1-output.md  against  inputs/gsa-lease
+Part A: 10 filled, 4 not in source, 0 conflict
+Part B: 24 rows, 0 requirement(s) dropped
+Part C: 1 rows
+FAIL A-SHAPE: A04: Value line after a Source block
+FAIL A-SHAPE: A04: Value line after a Source block
+FAIL A-SHAPE: A04: Value line after a Source block
+FAIL QUOTE: A04 source 1: not in Lease_SAM.pdf: "Department/Ind. Agency GENERAL SERVICES ADMINISTRATION / Sub-tier PUBLIC BUILDINGS SERVICE / Office PBS OFFICE OF LEASING"
+FAIL A-SHAPE: A07: Value line after a Source block
+FAIL QUOTE: A07 source 1: not in Lease_SAM.pdf: "Response Date Oct 14, 2026 5:00 PM EDT"
+FAIL A-SHAPE: A10: Value line after a Source block
+FAIL A-SHAPE: A10: Value line after a Source block
+FAIL A-SHAPE: A10: Value line after a Source block
+RESULT: FAIL (9 failure(s), 0 warning(s))

@@ -1,0 +1,16 @@
+verify.py  runs/blm-janitorial/run1-output.md  against  inputs/blm-janitorial
+Part A: 11 filled, 0 not in source, 3 conflict
+Part B: 186 rows, 3 requirement(s) dropped
+Part C: 14 rows
+FAIL QUOTE: A05 source 1: not in Sol_140L1726Q0071.pdf: "NORTH AMERICAN INDUSTRY CLASSIFICATION STANDARD (NAICS): 561720 SIZE STANDARD: $22"
+FAIL QUOTE: A07 source 1: not in Sol_140L1726Q0071.pdf: "8. OFFER DUE DATE/ LOCAL TIME 09/25/2026 0800 MD"
+FAIL QUOTE: A10 source 1: not in Sol_140L1726Q0071.pdf: "7. FOR SOLICITATION INFORMATION CALL: a. NAME Lashondra Hubbard"
+FAIL B-CLAUSE-DROPPED: clause 52.222-90 in Sol_140L1726Q0071.pdf has no CLAUSE row
+FAIL B-DROPPED: Sol_140L1726Q0071.pdf: no REQ row contains "Part 8 - Required Sources of Supplies and"
+FAIL B-DROPPED: A04_PWS_-_SWD_Montrose_Janitorial.pdf: no REQ row contains "details how work will be evaluated , as stated in"
+FAIL B-DROPPED: A04_PWS_-_SWD_Montrose_Janitorial.pdf: no REQ row contains "with the workmanship required under this contract"
+CHECK BY EYE (visual marks the text cannot prove):
+  A02 F1 p.1 [visual]: "14. METHOD OF SOLICITATION REQUEST FOR QUOTE (RFQ)" -> marked
+  A06 F1 p.1 [visual]: "10. THIS ACQUISITION IS UNRESTRICTED OR SET ASIDE: % FOR:" -> marked
+  A13 F1 p.1 [visual]: "28. CONTRACTOR IS REQUIRED TO SIGN THIS DOCUMENT AND RETURN 1 COPIES TO ISSUING " -> marked
+RESULT: FAIL (7 failure(s), 0 warning(s))
