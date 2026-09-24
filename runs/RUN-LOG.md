@@ -424,3 +424,13 @@ suggest these models may receive the PDF differently in claude.ai (text
 without page breaks or file name) rather than reading it less carefully.
 This is a hypothesis, not tested. It points to the page-marked text input
 idea for after the deadline.
+
+
+**Tested:** in the same chat, Raph asked Opus 4.8 for the exact file name,
+the page count and the first words of page 4. Its answer, in short: the PDF
+arrived as inline content with no file name, it had no reliable page count,
+and its page locators were inferred from the rendered layout rather than
+read from the PDF's page structure. So on PDFs in claude.ai, the missing
+file name and wrong pages come from what the model is given. The rules
+cannot fix that. Page-marked text input, or a .docx, is the fix to try
+after the deadline.
