@@ -434,3 +434,13 @@ read from the PDF's page structure. So on PDFs in claude.ai, the missing
 file name and wrong pages come from what the model is given. The rules
 cannot fix that. Page-marked text input, or a .docx, is the fix to try
 after the deadline.
+
+**Correction, same chat:** it then checked the attached file with its own
+tools and answered `Lease_SAM.pdf`, 8 pages, page 4 starting "Parking
+Spaces (Total):". All three are correct. Its corrected page list was partly
+wrong (delineated area is p.3, not p.4; Section 889 is p.5, not p.6). So the
+file name and page structure are reachable in claude.ai; Sonnet and Opus
+4.8 do not look unless asked. A rule telling the model to read the file
+name and pages from the attachment itself might fix runs 6, 8 and 10 where
+code execution is on. Untested. Its offer to regenerate the intake was not
+taken: a coached rerun would not be a clean run.
