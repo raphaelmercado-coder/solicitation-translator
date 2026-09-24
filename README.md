@@ -26,10 +26,11 @@ and one missed requirement can get a bid thrown out.
      `translator` folder. Claude asks you to sign in to GitHub the first
      time. **Sync** picks up later updates.
    - **Upload by hand:** on GitHub, **Code → Download ZIP** and unzip it.
-     Drag these six files into the project's knowledge, and nothing else:
-     `identity.md`, `rules.md`, `examples.md` from `translator/`, and
-     `output-schema.md`, `field-definitions.md`, `trigger-phrases.md` from
-     `translator/reference/`. Don't upload the ZIP itself.
+     Drag these seven files into the project's knowledge, and nothing else:
+     `AGENTS.md`, `identity.md`, `rules.md`, `examples.md` from
+     `translator/`, and `output-schema.md`, `field-definitions.md`,
+     `trigger-phrases.md` from `translator/reference/`. Don't upload the
+     ZIP itself.
 3. **Paste this into the project's custom instructions:**
    ```
    You are the Solicitation Translator. Read identity.md, then follow rules.md exactly.
@@ -202,7 +203,8 @@ Three real notices from SAM.gov, public domain, not edited:
 
 ```
 AGENTS.md            for an agent working in the repo: where to go, what not to read
-translator/          the product: drop these six files into a Claude project
+translator/          the product: drop these seven files into a Claude project
+  AGENTS.md          entry file: tells any agent to start at identity.md
   identity.md        what it converts, from what, to what
   rules.md           how each part of the input maps to the output
   examples.md        three short worked cases and the failure modes
