@@ -1,0 +1,10 @@
+verify.py  runs/va-fire-protection/run9-sonnet-docx-output.md  against  inputs/va-fire-protection
+Part A: 12 filled, 2 not in source, 0 conflict
+Part B: 142 rows, 1 requirement(s) dropped
+Part C: 1 rows
+FAIL A-VALUE: A13: Value 'All submissions should be provided electronically in a Microsoft Word or Adobe P' is not inside any of its quotes
+FAIL A-SHAPE: A14: unexpected line '---'
+FAIL SHAPE: Part B: unexpected line 'This is the end of the input; no further rows follow.'
+FAIL SHAPE: Part B: unexpected line '---'
+FAIL B-DROPPED: 36C24126Q0831.docx: no REQ row contains "Additional wire should match existing and be"
+RESULT: FAIL (5 failure(s), 0 warning(s))

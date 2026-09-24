@@ -375,3 +375,32 @@ Findings:
 **What it shows:** the three final-check lines did not fix Sonnet's pages or
 hyphens, and one of them made it ask a question mid-run. Sonnet stays
 unsupported; the README already says to use Opus 5.5.
+
+## Run 9: Sonnet on the .docx notice
+
+To test whether Sonnet's PDF problems go away with Word input: same
+claude.ai project (`f1af55b`), new chat, Sonnet, `36C24126Q0831.docx` (VA
+fire protection, 41 pp). The first reply stopped at B080 and printed Part C
+right after the `CONTINUED` line. After "continue", Raph pasted one complete
+document, B001 to B126 (`run9-sonnet-docx-output.md`, saved as pasted).
+
+**Result: FAIL 5**, 142 rows, 0 warnings (`run9-verify.txt`).
+- **Better than on PDF:** exact file name, heading locators, no hyphen or
+  page problems. Every Part A quote is in the notice.
+- **Shape (3):** two `---` lines between parts and an added line "This is
+  the end of the input; no further rows follow."
+- **A13 value (1):** "All submissions should be ..." capitalizes a word the
+  notice prints lowercase mid-sentence ("In addition, all submissions ...").
+- **Dropped (1):** "Additional wire should match existing and be ..." has
+  no row.
+- **Missed, not caught by the checker:** Part C is `NONE`. The notice names
+  six documents it does not include (as-built drawings, original
+  submittals, project documents, the References section, the ILSM form, the
+  points list); run 4 listed all six. The checker proves Part C agrees with
+  Part A but cannot prove Part C is complete.
+- Invented facts: none.
+
+**What runs 6, 8 and 9 show:** Word input removes Sonnet's page and hyphen
+problems, but Sonnet still adds lines, changes a letter, drops a
+requirement and misses what the notice left out. Tested and passing: Opus
+5.5 only.
