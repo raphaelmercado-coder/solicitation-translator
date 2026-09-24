@@ -17,10 +17,19 @@ and one missed requirement can get a bid thrown out.
 
 ## Use it (about 2 minutes)
 
-1. **Get the files.** On GitHub: **Code → Download ZIP**, then unzip.
-2. **Make a Claude project** and upload the six files in
-   [`translator/`](translator/) to its knowledge. Three of them are in
-   `translator/reference/`; include those too.
+1. **Make a Claude project** on claude.ai.
+2. **Add the translator to the project's knowledge.** Only the
+   [`translator/`](translator/) folder goes in; the rest of this repo holds
+   test answers. Pick one way:
+   - **From GitHub (easiest):** in the project's knowledge, click
+     **+ → GitHub**, paste this repo's URL and select only the
+     `translator` folder. Claude asks you to sign in to GitHub the first
+     time. **Sync** picks up later updates.
+   - **Upload by hand:** on GitHub, **Code → Download ZIP** and unzip it.
+     Drag these six files into the project's knowledge, and nothing else:
+     `identity.md`, `rules.md`, `examples.md` from `translator/`, and
+     `output-schema.md`, `field-definitions.md`, `trigger-phrases.md` from
+     `translator/reference/`. Don't upload the ZIP itself.
 3. **Paste this into the project's custom instructions:**
    ```
    You are the Solicitation Translator. Read identity.md, then follow rules.md exactly.
