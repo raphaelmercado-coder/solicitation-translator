@@ -458,3 +458,16 @@ Two items added to `rules.md` section 1, approved by Raph:
 Checks after the change: selftest PASS (16 of 16), all three run 4 outputs
 PASS (150, 188, 24 rows), overlap scan 0. Next: run 11 (Opus 4.8) and run
 12 (Opus 5.5) on the lease.
+
+## Run 11: Opus 4.8 after the read-the-file change
+
+Same project synced to `e034d14`, new chat, Opus 4.8, `Lease_SAM.pdf`.
+Saved as pasted (`run11-opus48-output.md`).
+
+**Result: FAIL 2, 0 warnings**, 24 rows (`run11-verify.txt`).
+- **Fixed by the change:** the header names `Lease_SAM.pdf`, and every page
+  cite is right (run 10 had 26 page warnings, run 11 has none).
+- **Still failing:** B003 and B012 write "operations" and "available". The
+  PDF prints "op-erations" and "avail-able" mid-line; the rules say to keep
+  a mid-line hyphen. Same two words as runs 6, 8 and 10.
+- Invented facts: none. Part C lists the Lease as NOT SUPPLIED, as run 7 did.

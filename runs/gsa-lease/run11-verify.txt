@@ -1,0 +1,7 @@
+verify.py  runs/gsa-lease/run11-opus48-output.md  against  inputs/gsa-lease
+Part A: 10 filled, 4 not in source, 0 conflict
+Part B: 24 rows, 0 requirement(s) dropped
+Part C: 1 rows
+FAIL QUOTE: B003: not in Lease_SAM.pdf: "space should have no history of prior heavy industrial use such as large dry cleaning operations, gas stations, and industrial facilities."
+FAIL QUOTE: B012: not in Lease_SAM.pdf: "parking-to-square-foot ratio available on site shall at least meet current local code requirements, or, in absence of a local code requireme"
+RESULT: FAIL (2 failure(s), 0 warning(s))
