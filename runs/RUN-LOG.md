@@ -216,7 +216,7 @@ Fixes:
   (`runs/`, `tests/verify.py`), and two bare `trigger-phrases.md` pointers did
   not resolve from `translator/`. All six are fixed.
 - Added a schema version and date to `identity.md`.
-- Added a root `CLAUDE.md` for agents: where to go, and don't read `tests/`,
+- Added a root `AGENTS.md` for agents: where to go, and don't read `tests/`,
   `runs/` or `inputs/` while translating.
 
 Run 5 (GSA lease, clean room, edited translator) was also a disguised-ask
