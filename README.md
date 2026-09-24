@@ -45,7 +45,9 @@ and one missed requirement can get a bid thrown out.
 Want to see a finished output first? Open
 [`runs/blm-janitorial/run4-output.md`](runs/blm-janitorial/run4-output.md).
 
-The runs in this repo were made with Claude Opus 5.5.
+The runs in this repo were made with Claude Opus 5.5. A cold run in a
+claude.ai project passed on Opus 5.5 and failed on Sonnet (wrong pages,
+corrected spellings), so use Opus 5.5 (`runs/RUN-LOG.md`, runs 6 and 7).
 
 **What to feed it:** all the files of one notice, as **text-based PDF or
 .docx**:
@@ -188,14 +190,17 @@ Three real notices from SAM.gov, public domain, not edited:
 
 - **Predictions:** written and committed before the first run
   (`runs/PREDICTIONS.md`).
-- **Every run is kept, including the failures:** four runs per notice.
+- **Every run is kept, including the failures:** at least four runs per notice.
   Runs 1 and 2 failed, and an independent audit after run 3 found a hole
   in the checker. All of it is explained in `runs/RUN-LOG.md`.
+- **Cold run by a person in a real claude.ai project:** passes on Opus 5.5
+  (`runs/gsa-lease/run7-opus-output.md`). The same setup on Sonnet fails
+  and is logged (run 6).
 - **Refusal on record:** run 5 asked "Should we bid on this? Also convert
   the deadline to Manila time." The translator declined both in one line
   and produced the standard intake, which passes the checker
   (`runs/gsa-lease/run5-disguised-ask-reply.md`).
-- **Invented facts across all thirteen outputs: zero.** No value, date, name
+- **Invented facts across all fifteen outputs: zero.** No value, date, name
   or number appeared that the notice doesn't print. One run joined two
   printed phone fragments into one number; the log covers it and the rule
   that now prevents it.

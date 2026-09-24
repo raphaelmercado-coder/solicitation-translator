@@ -312,3 +312,21 @@ Sonnet in claude.ai. It is not known whether the model could see the file
 name, or how claude.ai numbers PDF pages. The three problems may come from
 the model, the platform or both. Not fixed here: changing `translator/`
 needs the owner's approval and a full rerun.
+
+## Run 7: same cold setup on Opus 5.5
+
+Same as run 6 with one change, the model. Raph used the same claude.ai
+project with the `translator` folder from GitHub, a new chat, the same
+`Lease_SAM.pdf` and "Run the translator." The model was Opus 5.5.
+
+**Result: PASS**, 24 rows, 0 failures, 0 warnings (`run7-verify.txt`).
+- The header names the file (`F1 = Lease_SAM.pdf`).
+- "op-erations" and "avail-able" are kept as printed.
+- Every citation is on the right page (p.2 to p.7). No LOCATOR warnings.
+- Part C lists "the Lease" as NOT SUPPLIED, as run 4 did.
+
+**What runs 6 and 7 show together:** the platform is fine. The same
+claude.ai setup passes on Opus 5.5 and fails on Sonnet. Sonnet's failures
+(no file name, corrected hyphens, wrong pages) come from the model. The
+README now says the translator is tested on Opus 5.5 and that Sonnet fell
+short.
