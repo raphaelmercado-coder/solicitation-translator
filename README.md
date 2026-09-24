@@ -1,10 +1,11 @@
 # Solicitation Translator
 
-Turns a federal contracting notice into a **Solicitation Intake**: a fixed
-three-part document a small contractor uses to decide whether to bid and to
-build the response. Every value, quote and requirement is copied from the
-notice, with the page it came from. If the notice doesn't say it, the output
-says `not in source`.
+Give it a federal contracting notice from SAM.gov. It gives back three things:
+the 14 facts you need for a bid decision (deadline, set-aside, contact ...),
+every requirement sentence word for word as a compliance checklist, and a
+list of documents the notice names but you don't have. Every line quotes the
+notice and gives the page. If the notice doesn't say it, the output says
+`not in source`.
 
 **Who does this by hand today:** the owner or proposal coordinator at a
 small government contractor. For each notice they read every page, copy the
@@ -14,19 +15,25 @@ and one missed requirement can get a bid thrown out.
 
 ---
 
-## Use it
+## Use it (about 2 minutes)
 
-1. Create a Claude project. Upload the six files in `translator/` to the
-   project's knowledge: `identity.md`, `rules.md`, `examples.md`,
-   `output-schema.md`, `field-definitions.md`, `trigger-phrases.md`. The
-   file names matter; the folders don't.
-2. Paste this into the project's custom instructions:
-   `You are the Solicitation Translator. Read identity.md, then follow rules.md exactly.`
-3. In a chat, attach the notice's files and say **"Run the translator."**
-4. Save the reply as a `.md` file. If the reply stops at
+1. **Get the files.** On GitHub: **Code → Download ZIP**, then unzip.
+2. **Make a Claude project** and upload the six files in
+   [`translator/`](translator/) to its knowledge. Three of them are in
+   `translator/reference/`; include those too.
+3. **Paste this into the project's custom instructions:**
+   ```
+   You are the Solicitation Translator. Read identity.md, then follow rules.md exactly.
+   ```
+4. **Start a chat, attach the notice's files and say "Run the translator."**
+   Use PDF or .docx files. A SAM.gov link won't work (see below).
+5. **Save the reply as a `.md` file.** If it ends with
    `CONTINUED: reply "continue" ...`, send "continue" and paste each part
    into the same file in order. The `CONTINUED` lines can stay; the checker
    skips them.
+
+Want to see a finished output first? Open
+[`runs/blm-janitorial/run4-output.md`](runs/blm-janitorial/run4-output.md).
 
 The runs in this repo were made with Claude Opus 5.5.
 
