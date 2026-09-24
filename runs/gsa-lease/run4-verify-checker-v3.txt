@@ -1,0 +1,12 @@
+verify.py  runs/gsa-lease/run4-output.md  against  inputs/gsa-lease
+Part A: 10 filled, 4 not in source, 0 conflict
+Part B: 24 rows, 0 requirement(s) dropped
+Part C: 1 rows
+FAIL A-VALUE: A02: Value 'Presolicitation' is not inside any of its quotes
+FAIL A-VALUE: A04: Value 'GENERAL SERVICES ADMINISTRATION' is not inside any of its quotes
+FAIL A-VALUE: A04: Value 'PUBLIC BUILDINGS SERVICE' is not inside any of its quotes
+FAIL A-VALUE: A04: Value 'PBS OFFICE OF LEASING' is not inside any of its quotes
+FAIL A-VALUE: A05: Value '531120 - Lessors of Nonresidential Buildings (except Miniwarehouses)' is not inside any of its quotes
+FAIL A-VALUE: A10: Value 'melissa.hein@gsa.gov' is not inside any of its quotes
+FAIL A-VALUE: A10: Value 'runako.spencer@gsa.gov' is not inside any of its quotes
+RESULT: FAIL (7 failure(s), 0 warning(s))

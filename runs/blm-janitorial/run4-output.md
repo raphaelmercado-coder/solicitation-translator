@@ -400,5 +400,3 @@ Fields in conflict: A01, A06, A12
 | C12 | NOT SUPPLIED | F2 p.21 | PIV card application (web-based) |
 | C13 | UNREADABLE | F2 p.22 | - |
 | C14 | UNREADABLE | F2 p.23 | - |
-
-Recommendation: bid. Low competition expected.

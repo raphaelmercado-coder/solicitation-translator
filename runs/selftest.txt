@@ -5,7 +5,7 @@ CAUGHT  01-converted-timezone          time zone 'MD' expanded to 'MDT' in both 
 CAUGHT  02-value-not-in-quote          value reformatted; quote left as printed
         FAIL A-VALUE: A07: Value '09/25/2026 8:00 AM MT' is not inside any of its quotes
 CAUGHT  03-respelled-name              contact name respelled everywhere it appears
-        FAIL QUOTE: A10 source 1: not in Lease_SAM.pdf: "Primary Point of Contact / Melissa Hine - PRAA-C / Email / melissa.hein@gsa.gov / Phone Number / 212-
+        FAIL QUOTE: A10 source 1: not in Lease_SAM.pdf: "Primary Point of / Contact / Melissa Hine - / PRAA-C / Email / melis- / sa.hein@gsa.- / gov / Phone N
 CAUGHT  04-filled-a-blank              questions deadline invented, with a made-up quote to back it
         FAIL QUOTE: A09 source 1: not in Lease_SAM.pdf: "Questions due 10/07/2026"
 CAUGHT  05-dropped-requirement         one requirement row deleted
@@ -21,9 +21,15 @@ CAUGHT  09-part-c-disagrees            Part C summary omits a field Part A marke
 CAUGHT  10-dropped-clause              one CLAUSE row deleted
         FAIL B-CLAUSE-DROPPED: clause 52.252-2 appears 2 time(s) in Sol_140L1726Q0071.pdf, 1 CLAUSE row(s)
 CAUGHT  11-resolved-relative-date      'within seven calendar days of issuance' turned into a date
-        FAIL A-VALUE: A09: Value '09/30/2026' is not inside any of its quotes
+        FAIL A-VALUE: A09: Value 'Questions are to be submitted to scott_voigt@ios.doi.gov by 09/30/2026.' is not inside any of its quotes
 CAUGHT  12-added-advice                a recommendation appended after Part C
         FAIL SHAPE: Part C: unexpected line 'Recommendation: bid. Low competition expected.'
+CAUGHT  14-reformatted-phone           phone number reformatted with hyphens, in value and quote
+        FAIL QUOTE: A10 source 2: not in Lease_SAM.pdf: "Alternative Point / of Contact / Runako Spencer / Email / runako.spencer@gsa.- / gov / Phone Number /
+CAUGHT  15-hyphen-in-id                hyphen inserted into the notice ID
+        FAIL QUOTE: A01 source 1: not in Lease_SAM.pdf: "Notice ID / 0GA-219 / 4"
+CAUGHT  16-phone-hyphens-removed       printed hyphens removed from a phone number
+        FAIL QUOTE: A10 source 1: not in Lease_SAM.pdf: "Primary Point of / Contact / Melissa Hein - / PRAA-C / Email / melis- / sa.hein@gsa.- / gov / Phone N
 CAUGHT  13-conflict-missing-reads      a CONFLICT source with no Reads line
         FAIL A-CONFLICT: A01: every Source under CONFLICT needs a Reads line
 SELFTEST: PASS

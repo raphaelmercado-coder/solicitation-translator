@@ -13,14 +13,9 @@ Source: F1 p.1
 Reads: 140L1726Q0071
 > 5. SOLICITATION NUMBER
 > 140L1726Q0071
-Source: F1 p.3
-Reads: 140L1726Q0071
-> REFERENCE NO. OF DOCUMENT BEING CONTINUED
-> 140L1726Q0071
 Source: F2 p.2
 Reads: 140L5424R0001
-> 140L5424R0001
-> SWD Montrose Complex Janitorial
+> 140L5424R0001 SWD Montrose Complex Janitorial
 
 ### A02 Notice type
 Value: REQUEST FOR QUOTE (RFQ)
@@ -41,9 +36,14 @@ Source: F2 p.1
 
 ### A04 Issuing office
 Value: COLORADO STATE OFF
-Value: Bureau of Land Management, Colorado State Office
+Value: Denver Federal Center
+Value: Building 40
+Value: Lakewood CO 80225
+Value: The Bureau of Land Management, Colorado State Office
 Source: F1 p.1
 > 9. ISSUED BY
+> CODE
+> LRA
 > COLORADO STATE OFF
 > Denver Federal Center
 > Building 40
@@ -54,28 +54,28 @@ Source: F1 p.2
 ### A05 NAICS code
 Value: 561720
 Value: $22
-Value: 561720, Janitorial Services ($22)
 Source: F1 p.1
-> NORTH AMERICAN
-> INDUSTRY CLASSIFICATION
 > STANDARD (NAICS):
 > 561720
 > SIZE STANDARD:
 > $22
 Source: F1 p.5
-> Administrative Codes
 > 561720, Janitorial Services ($22)
 
 ### A06 Set-aside
 Value: CONFLICT
 Source: F1 p.1 [visual]
-Reads: UNRESTRICTED
+Reads: UNRESTRICTED OR
 Mark: marked
 > 10. THIS ACQUISITION IS
 > UNRESTRICTED OR
 Source: F1 p.2
-Reads: this requirement is set-aside specifically to Source America non-profits listed at Nonprofit Locator | SourceAmerica®.
-> PURSUANT TO FAR 8.102 Mandatory source for services, this requirement is set-aside specifically to Source America non-profits listed at Nonprofit Locator | SourceAmerica®. No other participants are authorized for award.
+Reads: PURSUANT TO FAR 8.102 Mandatory source for services, this requirement is set-aside specifically to Source America non-profits listed at Nonprofit Locator | SourceAmerica®.
+> PURSUANT TO FAR 8.102 Mandatory source for services, this requirement is set-aside specifically to Source America non-profits listed at Nonprofit Locator | SourceAmerica®.
+> No other participants are authorized for award.
+Source: F1 p.6
+Reads: Notice of Total Small Business Set-Aside.
+> 52.219-6 Notice of Total Small Business Set-Aside. (NOV 2020) (Deviation JAN 2026)
 
 ### A07 Response due
 Value: 09/25/2026 0800 MDT
@@ -90,19 +90,20 @@ Source: F1 p.3
 > 2. Send quotation to scott_voigt@ios.doi.gov no later than the suspense date. Late quotes will not be considered.
 
 ### A09 Questions deadline
-Value: within seven calendar days of the issuance of the original solicitation
+Value: Questions are to be submitted to scott_voigt@ios.doi.gov within seven calendar days of the issuance of the original solicitation.
 Source: F1 p.3
 > 3. Questions are to be submitted to scott_voigt@ios.doi.gov within seven calendar days of the issuance of the original solicitation.
 
 ### A10 Point of contact
 Value: Lashondra Hubbard
-Value: Contracting Officer
 Value: Scott Voigt
 Value: 309-
 Value: 309-714-5645
 Value: scott_voigt@ios.doi.gov
+Value: Scott Voigt
+Value: scott_voigt@ios.doi.gov
 Value: 3032393637
-Value: Contract Specialist/ Procurement Technician
+Value: Lashondra Hubbard
 Value: lashondra_hubbard@ios.doi.gov
 Source: F1 p.1
 > 7. FOR SOLICITATION
@@ -116,92 +117,74 @@ Source: F1 p.4
 Source: F1 p.5
 > Contracting Officer
 > Scott Voigt, scott_voigt@ios.doi.gov, 3032393637
+Source: F1 p.5
 > Contract Specialist/ Procurement Technician
 > Lashondra Hubbard, lashondra_hubbard@ios.doi.gov, [To Be Determined]
 
 ### A11 Place of performance
-Value: See Schedule
 Value: BLM-CO UNCOMPAHGRE FIELD OFFICE*
 Value: 2465 S TOWNSEND AVE
 Value: MONTROSE CO 81401 US
-Value: Bureau of Land Management buildings located at 2505 South Townsend Ave. (South Building), 2465 South Townsend Ave. (North Building), and two warehouses referred to as the East Warehouse and the West Warehouse located on the BLM complex in Montrose, Colorado
-Source: F1 p.1
-> 15. DELIVER TO
-> See Schedule
-Source: F1 p.2
+Value: the Bureau of Land Management buildings located at 2505 South Townsend Ave. (South Building), 2465 South Townsend Ave. (North Building), and two warehouses referred to as the East Warehouse and the West Warehouse located on the BLM complex in Montrose, Colorado.
+Source: F1 p.1-2
+> DELIVER TO:
 > BLM-CO UNCOMPAHGRE FIELD OFFICE*
 > 2465 S TOWNSEND AVE
 > MONTROSE CO 81401 US
 Source: F2 p.1
-> Description of Work-The work covered under this specification consists of performing janitorial services at the Bureau of Land Management buildings located at 2505 South Townsend Ave. (South Building), 2465 South Townsend Ave. (North Building), and two warehouses referred to as the East Warehouse and the West Warehouse located on the BLM complex in Montrose, Colorado.
+> C.1.1 Description of Work-The work covered under this specification consists of performing janitorial services at the Bureau of Land Management buildings located at 2505 South Townsend Ave. (South Building), 2465 South Townsend Ave. (North Building), and two warehouses referred to as the East Warehouse and the West Warehouse located on the BLM complex in Montrose, Colorado.
 
 ### A12 Period of performance
 Value: CONFLICT
 Source: F1 p.3
-Reads: 10/01/2026 to 09/30/2027
+Reads: Period of Performance: 10/01/2026 to 09/30/2027
 > Period of Performance: 10/01/2026 to 09/30/2027
 Source: F1 p.4
-Reads: 10/01/2027 to 09/30/2028
+Reads: Period of Performance: 10/01/2027 to 09/30/2028
 > Period of Performance: 10/01/2027 to 09/30/2028
 Source: F1 p.4
-Reads: 10/01/2028 to 09/30/2029
+Reads: Period of Performance: 10/01/2028 to 09/30/2029
 > Period of Performance: 10/01/2028 to 09/30/2029
 Source: F1 p.4
-Reads: 10/01/2029 to 09/30/2030
+Reads: Period of Performance: 10/01/2029 to 09/30/2030
 > Period of Performance: 10/01/2029 to 09/30/2030
 Source: F1 p.4
-Reads: 10/01/2030 to 09/30/2031
+Reads: Period of Performance: 10/01/2030 to 09/30/2031
 > Period of Performance: 10/01/2030 to 09/30/2031
 Source: F1 p.13
-Reads: shall not exceed 66 months
+Reads: The total duration of this contract, including the exercise of any options under this clause, shall not exceed 66 months.
 > (c) The total duration of this contract, including the exercise of any options under this clause, shall not exceed 66 months.
 Source: F2 p.16
-Reads: 04/1/2024 – 03/31/2025
+Reads: Base Year LS 04/1/2024 – 03/31/2025
 > REQUIRED DELIVERY SCHEDULE
-> Base Year
-> 04/1/2024 – 03/31/2025
+> Base Year LS 04/1/2024 – 03/31/2025
 Source: F2 p.16
-Reads: 04/1/2025 – 03/31/2026
-> Option Year 1
-> 04/1/2025 – 03/31/2026
+Reads: Option Year 1 LS 04/1/2025 – 03/31/2026
+> Option Year 1 LS 04/1/2025 – 03/31/2026
 Source: F2 p.16
-Reads: 04/1/2026 – 03/31/2027
-> Option Year 2
-> 04/1/2026 – 03/31/2027
+Reads: Option Year 2 LS 04/1/2026 – 03/31/2027
+> Option Year 2 LS 04/1/2026 – 03/31/2027
 Source: F2 p.16
-Reads: 04/1/2027 – 03/31/2028
-> Option Year 3
-> 04/1/2027 – 03/31/2028
+Reads: Option Year 3 LS 04/1/2027 – 03/31/2028
+> Option Year 3 LS 04/1/2027 – 03/31/2028
 Source: F2 p.16
-Reads: 04/1/2028 – 03/31/2029
-> Option Year 4
-> 04/1/2028 – 03/31/2029
+Reads: Option Year 4 LS 04/1/2028 – 03/31/2029
+> Option Year 4 LS 04/1/2028 – 03/31/2029
 
 ### A13 Response limits
 Value: All proposals documents shall be provided in pdf format.
 Value: No other formatting limitations exist.
-Value: RETURN 1 COPIES TO ISSUING OFFICE
 Source: F1 p.3
 > All proposals documents shall be provided in pdf format. No other formatting limitations exist.
-Source: F1 p.1 [visual]
-Mark: marked
-> 28. CONTRACTOR IS REQUIRED TO SIGN THIS DOCUMENT AND RETURN 1
-> COPIES TO ISSUING OFFICE.
 
 ### A14 Evaluation basis
 Value: The Government will award a contract resulting from this solicitation to the responsible Offeror whose offer conforming to the solicitation will be most advantageous to the Government, price and other factors considered.
 Value: This award will be based upon the lowest price quotation that meets the requirements of the solicitation.
 Value: The Government will evaluate offers for award purposes by adding the total price for all options to the total price for the basic requirement.
-Value: Government Past Performance Systems including SAM.gov and CPARS.gov will be evaluated to support the determination of responsibility required per FAR 9.104-1.
-Value: The Government will evaluate equally, as regards time of delivery, offers that propose delivery of each quantity within the applicable delivery period specified above.
 Source: F1 p.17
 > (a) Evaluation factors. The Government will award a contract resulting from this solicitation to the responsible Offeror whose offer conforming to the solicitation will be most advantageous to the Government, price and other factors considered. The following factors will be used to evaluate offers:
 > This award will be based upon the lowest price quotation that meets the requirements of the solicitation.
 > (b) Options (if applicable). The Government will evaluate offers for award purposes by adding the total price for all options to the total price for the basic requirement.
-Source: F1 p.3
-> 5. Government Past Performance Systems including SAM.gov and CPARS.gov will be evaluated to support the determination of responsibility required per FAR 9.104-1.
-Source: F2 p.16
-> The Government will evaluate equally, as regards time of delivery, offers that propose delivery of each quantity within the applicable delivery period specified above.
 
 ## Part B: Compliance matrix
 
@@ -326,7 +309,7 @@ Source: F2 p.16
 | B110 | REQ | F2 p.7 | C.4.7 | The BLM shall provide: building access to work areas, identification badges (ID badges shall be conspicuously worn on the contractor’s employees clothing during working hours); and building alarm codes for deactivation of government alarm systems. | [HUMAN] |
 | B111 | REQ | F2 p.7 | C.4.7 | These items shall be hand receipted to the contractor – contractor shall be responsible for government items in their possession. | [HUMAN] |
 | B112 | REQ | F2 p.7 | C.4.7 | If they have not arrived before the start date of the contract, the working hours must be during business hours. | [HUMAN] |
-| B113 | REQ | F2 p.9 | C.5.2 | PERFORMANCE REQUIREMENTS, SERVICE FREQUENCY AND HOURS OF SERVICE: Services under this contract shall be scheduled as follows. | [HUMAN] |
+| B113 | REQ | F2 p.9 | C.5.2 | Services under this contract shall be scheduled as follows. | [HUMAN] |
 | B114 | REQ | F2 p.9 | C.5.2.2 | It is essential that bathrooms be thoroughly cleaned and disinfected daily, showers, and changing areas should be thoroughly clean and disinfected daily from April through September and weekly for October through March for the West Warehouse. | [HUMAN] |
 | B115 | REQ | F2 p.9 | C.5.2.2 | Toilet seats shall be left in a raised position. | [HUMAN] |
 | B116 | REQ | F2 p.9 | C.5.2.2 | All surfaces that are exposed to handling such as doors, partitions, locks, railings, door knobs, faucets, soap and paper receptacles, etc. shall be cleaned with disinfectant. | [HUMAN] |
@@ -349,9 +332,21 @@ Source: F2 p.16
 | B131b | REQ | F2 p.13 | B. | Horizontal Surfaces – The following conditions shall exist after cleaning: surface shall have been treated with disinfectant; surface shall be free of dust streaks; corners, crevices, molding, and ledges shall be free of dust; and the surfaces shall be free of oil, spots, or smudges. | [HUMAN] |
 | B131c | REQ | F2 p.13 | C. | Wastebaskets and Trash Containers – The inside and outside surfaces shall have been washed or damp-wiped and odor-free. | [HUMAN] |
 | B131d | REQ | F2 p.13-14 | D. | Mirrors and Glass – Mirrors shall have a clean and bright appearance. Glass shall be clean and completely free of dirt, dust, oxidation buildup, spots resulting from irrigation and any other foreign matter. Glass shall be completely clean along edges and in corners. | [HUMAN] |
-| B131e | REQ | F2 p.14 | E. | Non-Carpeted Floors 1) Cleaning – All floors shall be clean and free of dirt streaks. No dirt shall be left in corners, behind pillars, under furniture, behind doors, or stair landings, or left in entryway or hall. Sidewalks and entrances shall be clean of all dirt and trash. No dirt shall be left where sweepings were picked up. There shall be no dirt, dust, or any foreign matter under desks, tables, or chairs. 2) Mopping and Scrubbing – The floors shall be clean and free of dirt, water streaks, mop marks, strings, etc., to present an overall appearance of cleanliness. All surfaces shall be dry and corners and cracks clean. 3) Stripping – There shall be no gum, stains, burns, scuff marks, etc., evident. There shall be no buildup in corners or crevices. Walls, baseboard, and other surfaces shall be free of sealer residue and marks from equipment. Floors shall be free of streaks, mop strand marks, and skipped areas. 4) Waxing – Non-carpeted floors shall be free of streaks, scum, mop strand marks, and skipped areas and shall have been buffed to a high shine. Walls, baseboard, and other surfaces shall be free of sealer residue and marks from equipment. | [HUMAN] |
-| B131f | REQ | F2 p.14-15 | F. | Restrooms and Showers – Sanitary conditions must be maintained daily. 1) All porcelain and chrome/stainless steel fixtures shall be free of calcium buildup, odors, dirt, or stains in corners or underside of sinks and toilets. 2) All metal surfaces shall be clean and bright with a polished appearance. 3) All painted surfaces (stall partitions, walls, etc.) shall be free of dirt, dust, splatters, and cobwebs. 4) All surfaces shall be clean with no water or cleaner streaks evident. Fixtures shall be clean and bright. 5) There shall be no dust, spots, stains, rust, green encrustation, or excess moisture. 6) Toilets, urinals, sinks, partitions, sanitary napkin receptacles, and trash containers shall be odor-free. | [HUMAN] |
-| B131g | REQ | F2 p.15 | G. | Miscellaneous Surfaces 1) Fixtures, e.g. towel dispensers, drinking fountains, wash basins, all bright metal surfaces, door kicks, lockers, light fixtures, and light lenses shall be clean and bright and completely free of stains, rust, oxidation buildup, and excess moisture. 2) Venetian blinds, upholstered furniture and bases, tables, chairs, woodwork, walls, entrance doors, walkways and entrance ceilings, movable office partitions, moldings, and air vents shall be free of smudges, marks, spots, dirt and debris, without discoloration. | [HUMAN] |
+| B131e | REQ | F2 p.14 | E. | Non-Carpeted Floors | [HUMAN] |
+| B131f | REQ | F2 p.14 | 1) | Cleaning – All floors shall be clean and free of dirt streaks. No dirt shall be left in corners, behind pillars, under furniture, behind doors, or stair landings, or left in entryway or hall. Sidewalks and entrances shall be clean of all dirt and trash. No dirt shall be left where sweepings were picked up. There shall be no dirt, dust, or any foreign matter under desks, tables, or chairs. | [HUMAN] |
+| B131g | REQ | F2 p.14 | 2) | Mopping and Scrubbing – The floors shall be clean and free of dirt, water streaks, mop marks, strings, etc., to present an overall appearance of cleanliness. All surfaces shall be dry and corners and cracks clean. | [HUMAN] |
+| B131h | REQ | F2 p.14 | 3) | Stripping – There shall be no gum, stains, burns, scuff marks, etc., evident. There shall be no buildup in corners or crevices. Walls, baseboard, and other surfaces shall be free of sealer residue and marks from equipment. Floors shall be free of streaks, mop strand marks, and skipped areas. | [HUMAN] |
+| B131i | REQ | F2 p.14 | 4) | Waxing – Non-carpeted floors shall be free of streaks, scum, mop strand marks, and skipped areas and shall have been buffed to a high shine. Walls, baseboard, and other surfaces shall be free of sealer residue and marks from equipment. | [HUMAN] |
+| B131j | REQ | F2 p.14 | F. | Restrooms and Showers – Sanitary conditions must be maintained daily. | [HUMAN] |
+| B131k | REQ | F2 p.14 | 1) | All porcelain and chrome/stainless steel fixtures shall be free of calcium buildup, odors, dirt, or stains in corners or underside of sinks and toilets. | [HUMAN] |
+| B131l | REQ | F2 p.14 | 2) | All metal surfaces shall be clean and bright with a polished appearance. | [HUMAN] |
+| B131m | REQ | F2 p.14 | 3) | All painted surfaces (stall partitions, walls, etc.) shall be free of dirt, dust, splatters, and cobwebs. | [HUMAN] |
+| B131n | REQ | F2 p.14 | 4) | All surfaces shall be clean with no water or cleaner streaks evident. Fixtures shall be clean and bright. | [HUMAN] |
+| B131o | REQ | F2 p.14 | 5) | There shall be no dust, spots, stains, rust, green encrustation, or excess moisture. | [HUMAN] |
+| B131p | REQ | F2 p.15 | 6) | Toilets, urinals, sinks, partitions, sanitary napkin receptacles, and trash containers shall be odor-free. | [HUMAN] |
+| B131q | REQ | F2 p.15 | G. | Miscellaneous Surfaces | [HUMAN] |
+| B131r | REQ | F2 p.15 | 1) | Fixtures, e.g. towel dispensers, drinking fountains, wash basins, all bright metal surfaces, door kicks, lockers, light fixtures, and light lenses shall be clean and bright and completely free of stains, rust, oxidation buildup, and excess moisture. | [HUMAN] |
+| B131s | REQ | F2 p.15 | 2) | Venetian blinds, upholstered furniture and bases, tables, chairs, woodwork, walls, entrance doors, walkways and entrance ceilings, movable office partitions, moldings, and air vents shall be free of smudges, marks, spots, dirt and debris, without discoloration. | [HUMAN] |
 | B132 | REQ | F2 p.15 | E.3.1 | Where the average number of deficiencies exceeds the AQL of twenty (20), the compound shall be reworked until fewer than twenty (20) deficiencies are recorded per sample area, after which payment will be made at seventy-five percent (75%) of the Contract price. | [HUMAN] |
 | B133 | REQ | F2 p.16 | F.1.0 | At the pre-work conference, the Contractor shall provide to the COR a written "work progress plan" that details his proposed work force and schedule to provide for orderly completion of the work within the contract performance time. | [HUMAN] |
 | B134 | REQ | F2 p.16 | F.1.0 | This work schedule must be acceptable to the Government. | [HUMAN] |
@@ -397,8 +392,8 @@ Fields in conflict: A01, A06, A12
 | C04 | NOT SUPPLIED | F2 p.3 | Complete the DOI Access Card Request Form (available from COR) |
 | C05 | NOT SUPPLIED | F2 p.3 | Complete the OF-306, Declaration for Federal Employment, |
 | C06 | NOT SUPPLIED | F2 p.3 | Complete the OF-612, Application for Federal Employment |
-| C07 | NOT SUPPLIED | F2 p.4 | Complete the SF-85, Questionnaire for Non-Sensitive Positions through e-QIP |
-| C08 | NOT SUPPLIED | F2 p.17 | The COR’s authorities and responsibilities are defined in the COR’s Designation Letter. |
+| C07 | NOT SUPPLIED | F2 p.4 | Complete the SF-85, Questionnaire for Non-Sensitive Positions |
+| C08 | NOT SUPPLIED | F2 p.17 | COR’s Designation Letter |
 | C09 | NOT SUPPLIED | F2 p.20 | OPM Standard Form 85 or 85P |
 | C10 | NOT SUPPLIED | F2 p.20 | OF 306 |
 | C11 | NOT SUPPLIED | F2 p.21 | Release to Obtain Credit Information |

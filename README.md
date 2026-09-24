@@ -66,17 +66,21 @@ A real excerpt (BLM janitorial RFQ, `runs/blm-janitorial/run4-output.md`):
 ### A06 Set-aside
 Value: CONFLICT
 Source: F1 p.1 [visual]
-Reads: UNRESTRICTED
+Reads: UNRESTRICTED OR
 Mark: marked
 > 10. THIS ACQUISITION IS
 > UNRESTRICTED OR
 Source: F1 p.2
-Reads: this requirement is set-aside specifically to Source America non-profits ...
+Reads: PURSUANT TO FAR 8.102 Mandatory source for services, this requirement is set-aside specifically to Source America non-profits ...
 > PURSUANT TO FAR 8.102 Mandatory source for services, this requirement is set-aside specifically to Source America non-profits ...
+> No other participants are authorized for award.
+Source: F1 p.6
+Reads: Notice of Total Small Business Set-Aside.
+> 52.219-6 Notice of Total Small Business Set-Aside. (NOV 2020) (Deviation JAN 2026)
 ```
 
-The form's box says anyone can compete; the text says only SourceAmerica
-nonprofits can. The translator shows both and doesn't pick. For a bid/no-go
+The form's box says anyone can compete, the text says only SourceAmerica
+nonprofits can, and a clause says small businesses only. The translator shows both and doesn't pick. For a bid/no-go
 meeting, that's the most important line in the document.
 
 ---
@@ -156,17 +160,21 @@ marked. Those need a person.
 
 Three real notices from SAM.gov, public domain, not edited:
 
-| Input | Type | Files | Result (run 3) |
+| Input | Type | Files | Result (run 4, current contract) |
 |---|---|---|---|
 | `inputs/va-fire-protection` | VA Sources Sought, fire alarm maintenance | 1 .docx, 41 pp | PASS: 150 rows, 2 fields not in source |
-| `inputs/blm-janitorial` | BLM RFQ on SF 1449 + PWS | 2 PDFs, 40 pp | PASS: 176 rows, 3 conflicts found |
+| `inputs/blm-janitorial` | BLM RFQ on SF 1449 + PWS | 2 PDFs, 40 pp | PASS: 188 rows, 3 conflicts found |
 | `inputs/gsa-lease` | GSA lease Presolicitation, SAM.gov page | 1 PDF, 8 pp | PASS: 24 rows, 4 fields not in source |
 
 - **Predictions:** written and committed before the first run
   (`runs/PREDICTIONS.md`).
-- **Every run is kept, including the failures:** runs 1 and 2 failed, for
-  reasons explained in `runs/RUN-LOG.md`.
-- **Invented facts across all nine outputs: zero.**
+- **Every run is kept, including the failures:** four runs per notice.
+  Runs 1 and 2 failed, and an independent audit after run 3 found a hole
+  in the checker. All of it is explained in `runs/RUN-LOG.md`.
+- **Invented facts across all twelve outputs: zero.** No value, date, name
+  or number appeared that the notice doesn't print. One run joined two
+  printed phone fragments into one number; the log covers it and the rule
+  that now prevents it.
 
 ---
 

@@ -18,22 +18,23 @@ quietly. The predictions in `PREDICTIONS.md` were committed before run 1.
 
 ## Results
 
-| Input | Run 1 | Run 2 | Run 3 (current contract) |
-|---|---|---|---|
-| VA fire protection, Sources Sought (.docx) | FAIL 3, then PASS on checker v2 | FAIL 6 | **PASS**, 150 rows |
-| BLM janitorial, RFQ + PWS (2 PDFs, 40 pp) | FAIL 15, then FAIL 7 on checker v2 | PASS | **PASS**, 176 rows |
-| GSA office lease, Presolicitation (SAM.gov page) | FAIL 10, then FAIL 9 on checker v2 | PASS | **PASS**, 24 rows |
+| Input | Run 1 | Run 2 | Run 3 | Run 4 (current contract) |
+|---|---|---|---|---|
+| VA fire protection, Sources Sought (.docx) | FAIL 3, then PASS on checker v2 | FAIL 6 | PASS, 150 rows | **PASS**, 150 rows |
+| BLM janitorial, RFQ + PWS (2 PDFs, 40 pp) | FAIL 15, then FAIL 7 on checker v2 | PASS | PASS, 176 rows | **PASS**, 188 rows |
+| GSA office lease, Presolicitation (SAM.gov page) | FAIL 10, then FAIL 9 on checker v2 | PASS | PASS, 24 rows | FAIL 7 on checker v3, then **PASS**, 24 rows |
 
-**Invented facts found in any run: zero.** Across the nine outputs, every
+**Invented facts found in any run: zero.** Across the twelve outputs, every
 failure was a dropped requirement, a formatting break, a quote joined across
 form boxes, or a checker bug. No value, date, name or number appeared that
 the input does not contain.
 
-`selftest.txt`: the checker catches **13 of 13** planted errors
+`selftest.txt`: the checker catches **16 of 16** planted errors
 (converted time zone, respelled name, invented deadline with a fake quote,
 dropped requirement, paraphrase, invented paragraph number, shape drift,
 Part C lying about Part A, dropped clause, resolved relative date, appended
-advice, conflict without its readings, value reformatted away from its quote).
+advice, conflict without its readings, value reformatted away from its
+quote, and three hyphen tricks on phone numbers and IDs).
 
 ## Run 1: what failed and whose fault it was
 
@@ -107,6 +108,57 @@ What each output surfaced for a bid team:
     basis are all `not in source`. The notice doesn't say how to submit an
     expression of interest.
   - "The Lease" is named but not attached.
+
+## Independent audit after run 3
+
+A fresh agent that had seen none of this work read the README cold, ran
+the checks, traced 12 random output claims back to the inputs by hand, and
+looked for leaks. All 12 claims were found in the inputs. It also found
+real problems:
+
+- **The checker ignored every hyphen.** Changing `4042731268` to
+  `404-273-1268` in an output still passed. That is exactly the kind of
+  reformatting the competition disqualifies.
+  - Fixed: hyphens now count. A hyphen at the end of a PDF line may be read
+    as a word-wrap, one hyphen at a time, and only when it hangs off a word.
+  - The PDF extraction switched to a mode that keeps line-end hyphens.
+  - Three new selftest fixtures cover it.
+  - All run 3 outputs still pass (`run3-verify-checker-v3.txt`).
+- **Partial answer-key leak.** The Sources Sought example in `examples.md`
+  mirrored the VA test notice's wording and layout. The schema's clause
+  example matched a BLM row down to the page, and its conflict example used
+  the SF 1449 set-aside label. All three were replaced with invented
+  examples. A 7-word overlap scan of `translator/` against the inputs now
+  finds nothing.
+- **Field placement:**
+  - Role labels ("Contracting Officer") were used as contact values.
+  - A pointer ("See Schedule") was used as a place.
+  - The SF 1449 instruction to return signed copies was used as a response
+    limit.
+  - A responsibility check was listed as an evaluation basis.
+  - Fixed in `field-definitions.md`.
+- **README:** no step for saving an output, no way to check your own run, no
+  install line, and undefined notation. All added.
+
+## Run 4: after the audit
+
+- **VA and BLM** pass as delivered. The audit's placement problems are gone:
+  - no role labels as values;
+  - no "See Schedule";
+  - no return-copies instruction in A13;
+  - A10 lists each contact's details together.
+- **Lease** failed the checker 7 times, and the checker was wrong. The
+  translator quoted each wrapped line as printed ("Preso-", "licita-",
+  "tion") with the value "Presolicitation". The schema allows a value to
+  read across wrapped fragments, but the checker kept the fragments'
+  wrap hyphens.
+  - Fixed: a fragment ending in a word-attached hyphen may be read through.
+    A spaced dash ("531120 -") always counts.
+  - Both results are kept: `run4-verify-checker-v3.txt` (FAIL) and
+    `run4-verify.txt` (PASS).
+- **Two runs were cut off** by a usage limit partway through (VA and BLM).
+  They produced no output, were restarted from scratch in fresh folders, and
+  are not counted.
 
 ## Predictions vs outcome (run 3)
 

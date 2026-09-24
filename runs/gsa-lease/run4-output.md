@@ -108,7 +108,7 @@ Value: melissa.hein@gsa.gov
 Value: 212-326-1064
 Value: Runako Spencer
 Value: runako.spencer@gsa.gov
-Value: 404-273-1268
+Value: 4042731268
 Source: F1 p.7
 > Primary Point of
 > Contact
@@ -128,7 +128,7 @@ Source: F1 p.7
 > runako.spencer@gsa.-
 > gov
 > Phone Number
-> 404-273-1268
+> 4042731268
 
 ### A11 Place of performance
 Value: State: Georgia

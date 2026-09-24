@@ -18,8 +18,8 @@ FIX = ROOT / "tests" / "fixtures"
 VERIFY = ROOT / "tests" / "verify.py"
 
 BASES = {
-    "gsa-lease": ROOT / "runs" / "gsa-lease" / "run3-output.md",
-    "blm-janitorial": ROOT / "runs" / "blm-janitorial" / "run3-output.md",
+    "gsa-lease": ROOT / "runs" / "gsa-lease" / "run4-output.md",
+    "blm-janitorial": ROOT / "runs" / "blm-janitorial" / "run4-output.md",
 }
 
 
@@ -96,8 +96,8 @@ FIXTURES = {
         lambda t: drop_row(t, first_row_id(t, "CLAUSE")),
         "one CLAUSE row deleted"),
     "11-resolved-relative-date": ("blm-janitorial", "A-VALUE",
-        lambda t: sub_once(t, "Value: within seven calendar days of the issuance of the original solicitation\n",
-                           "Value: 09/30/2026\n"),
+        lambda t: sub_once(t, "Value: Questions are to be submitted to scott_voigt@ios.doi.gov within seven calendar days of the issuance of the original solicitation.\n",
+                           "Value: Questions are to be submitted to scott_voigt@ios.doi.gov by 09/30/2026.\n"),
         "'within seven calendar days of issuance' turned into a date"),
     "12-added-advice": ("blm-janitorial", "SHAPE",
         lambda t: t.rstrip("\n") + "\n\nRecommendation: bid. Low competition expected.\n",

@@ -16,8 +16,12 @@ Source: F1 p.2
 ### A02 Notice type
 Value: Presolicitation
 Source: F1 p.2
-> Contract Opportunity Type
-> Presolicitation
+> Contract
+> Opportunity
+> Type
+> Preso-
+> licita-
+> tion
 
 ### A03 Title
 Value: General Services Administration (GSA) seeks to lease office space in Brunswick, GA
@@ -32,12 +36,20 @@ Value: PBS Office of Leasing
 Value: 1800 F STREET NW
 Value: WASHINGTON, DC 20405 USA
 Source: F1 p.2
-> Department/Ind. Agency
-> GENERAL SERVICES ADMINISTRATION
+> Department/Ind.
+> Agency
+> GENERAL SER-
+> VICES ADMINIS-
+> TRATION
+Source: F1 p.2
 > Sub-tier
-> PUBLIC BUILDINGS SERVICE
+> PUBLIC BUILD-
+> INGS SERVICE
+Source: F1 p.2
 > Office
-> PBS OFFICE OF LEASING
+> PBS OF-
+> FICE OF
+> LEASING
 Source: F1 p.7
 > Contracting Office Address
 > PBS Office of Leasing
@@ -47,21 +59,39 @@ Source: F1 p.7
 ### A05 NAICS code
 Value: 531120 - Lessors of Nonresidential Buildings (except Miniwarehouses)
 Source: F1 p.3
-> NAICS Code
-> 531120 - Lessors of Nonresidential Buildings (except Miniwarehouses)
+> NAICS
+> Code
+> 531120 -
+> Lessors
+> of Non-
+> residen-
+> tial
+> Build-
+> ings (ex-
+> cept
+> Mini-
+> ware-
+> houses)
 
 ### A06 Set-aside
 Value: No Set aside used
 Source: F1 p.3
-> Original Set Aside
-> No Set aside used
+> Original
+> Set Aside
+> No Set
+> aside
+> used
 
 ### A07 Response due
 Value: Oct 14, 2026 5:00 PM EDT
 Value: 10/14/2026
 Source: F1 p.2
-> Response Date
-> Oct 14, 2026 5:00 PM EDT
+> Response
+> Date
+> Oct 14,
+> 2026
+> 5:00 PM
+> EDT
 Source: F1 p.6
 > Expressions of Interest Due:
 > 10/14/2026
@@ -75,29 +105,36 @@ Source: F1 p.6
 > Questions due 10/07/2026
 
 ### A10 Point of contact
-Value: Melissa Hein - PRAA-C
+Value: Melissa Hein
 Value: melissa.hein@gsa.gov
 Value: 212-326-1064
 Value: Runako Spencer
 Value: runako.spencer@gsa.gov
 Value: 4042731268
 Source: F1 p.7
-> Primary Point of Contact
-> Melissa Hein - PRAA-C
+> Primary Point of
+> Contact
+> Melissa Hein -
+> PRAA-C
 > Email
-> melissa.hein@gsa.gov
+> melis-
+> sa.hein@gsa.-
+> gov
 > Phone Number
 > 212-326-1064
-> Alternative Point of Contact
+Source: F1 p.7
+> Alternative Point
+> of Contact
 > Runako Spencer
 > Email
-> runako.spencer@gsa.gov
+> runako.spencer@gsa.-
+> gov
 > Phone Number
 > 4042731268
 
 ### A11 Place of performance
-Value: Georgia
-Value: BRUNSWICK
+Value: State: Georgia
+Value: City: BRUNSWICK
 Value: -North: Glynco Parkway
 Value: -East: Hwy 17
 Value: -South: 1st Street
@@ -114,7 +151,7 @@ Source: F1 p.3
 ### A12 Period of performance
 Value: Full Term: 15
 Value: Firm Term: 10
-Value: 0 Years
+Value: Option Term: 0 Years
 Source: F1 p.4
 > Full Term: 15
 > Firm Term: 10

@@ -348,8 +348,14 @@ def parse_part_a(block, files, rep):
                 if b["mark"] not in ("marked", "not marked"):
                     rep.fail("A-VISUAL", f"{where}: [visual] needs 'Mark: marked' or 'Mark: not marked'")
                 rep.visual.append(f"{fid} {b['loc']}: \"{q[:80]}\" -> {b['mark']}")
-            quotes.append("".join(normalize(x) for x in b["quote"]))
-            if b["reads"] is not None and normalize(b["reads"]) not in quotes[-1]:
+            # A fragment ending in a hyphen attached to a word is a line the
+            # page wrapped: the value may read through it with or without
+            # that hyphen ('Preso-' + 'licita-' + 'tion' -> 'Presolicitation').
+            # A dash with a space before it ('531120 -') always counts.
+            qm = "".join(normalize(x)[:-1] + WRAP if re.search(r"[\w.@/]-\s*$", _fold(x))
+                         else normalize(x) for x in b["quote"])
+            quotes.append(qm)
+            if b["reads"] is not None and not pattern(normalize(b["reads"])).search(qm):
                 rep.fail("A-READS", f"{where}: Reads '{b['reads'][:80]}' is not inside its quote")
         if values == ["CONFLICT"]:
             status[fid] = "conflict"
@@ -360,7 +366,7 @@ def parse_part_a(block, files, rep):
             continue
         status[fid] = "filled"
         for v in values:
-            if not any(normalize(v) in q for q in quotes):
+            if not any(pattern(normalize(v)).search(q) for q in quotes):
                 rep.fail("A-VALUE", f"{fid}: Value '{v[:80]}' is not inside any of its quotes")
     return status
 
