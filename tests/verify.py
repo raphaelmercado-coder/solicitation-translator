@@ -32,6 +32,12 @@ Matching tolerances (the only ones; both sides get the same treatment):
   - a hyphen at the end of a line in the source may be read either way
     (kept, or dropped as a word-wrap hyphen), each one independently;
     nowhere else
+  - a PDF's requirement/clause coverage (not quotes) is checked against
+    both the layout and raw extractions, and only the reading with fewer
+    drops is reported, because one poppler version can glue two sentences
+    together at a line break where another reads them apart. A reading
+    that finds fewer headings or trigger sentences than the other is never
+    preferred, so a lossier extraction cannot hide a drop
   - repeated page headers/footers and bare page numbers removed at page edges
     (quotes are also checked against the unstripped text)
   - a quote may be split into fragments, one per '> ' line; each fragment
@@ -212,10 +218,16 @@ class Source:
             return "elsewhere"
         return "missing"
 
-    def coverage_text(self):
-        """Raw extraction for PDF (keeps line-end hyphens), headers removed."""
-        var = self.variants[1] if self.kind == "pdf" else self.variants[0]
-        return "\n".join(var)
+    def coverage_texts(self):
+        """Extraction(s) to scan for dropped requirements/clauses, headers
+        removed, line-end hyphens kept. For a PDF this is layout and raw
+        (variants 0 and 1): one extraction can glue two sentences together
+        at a line break the other reads correctly (a poppler version issue
+        seen on the lease notice), so coverage checks each and keeps the
+        reading with the fewest drops. A .docx has one variant."""
+        if self.kind == "pdf":
+            return ["\n".join(self.variants[0]), "\n".join(self.variants[1])]
+        return ["\n".join(self.variants[0])]
 
 
 # ---------------------------------------------------------------- parsing
@@ -490,19 +502,18 @@ def parse_part_b(block, files, rep):
         else:
             req_by_file.setdefault(f.name, []).append(loose(text))
     # coverage: nothing dropped
-    dropped = 0
-    for f in files.values():
-        text = f.coverage_text()
+    def scan(text, kind, reqs, have):
+        """One extraction's coverage result: (fail lines, dropped count,
+        n headings found, n trigger windows found)."""
+        fails = []
         heads, cspans = clause_spans(text, head_re, sec_re)
         skip = cspans + exempt_spans(text, exempt)
-        have = clause_by_file.get(f.name, {})
         for h in sorted(set(heads)):
             n_in, n_out = heads.count(h), have.get(h, 0)
             if n_out < n_in:
-                rep.fail("B-CLAUSE-DROPPED",
-                         f"clause {h} appears {n_in} time(s) in {f.name}, {n_out} CLAUSE row(s)")
-        reqs = req_by_file.get(f.name, [])
-        wins = trigger_windows(text, triggers, skip, f.kind == "docx")
+                fails.append(("B-CLAUSE-DROPPED",
+                    f"clause {h} appears {n_in} time(s) in {f.name}, {n_out} CLAUSE row(s)"))
+        wins = trigger_windows(text, triggers, skip, kind == "docx")
         # Fallback for windows whose left words are a heading, list number or
         # page furniture the row rightly leaves out: the trigger and the four
         # words after it must appear in REQ rows at least as many times as
@@ -512,6 +523,7 @@ def parse_part_b(block, files, rep):
             k = loose(rk); need[k] = need.get(k, 0) + 1
         for k in need:
             seen[k] = sum(r.count(k) for r in reqs)
+        dropped = 0
         for pos, window, rk in wins:
             if any(loose(window) in r for r in reqs):
                 continue
@@ -519,7 +531,25 @@ def parse_part_b(block, files, rep):
             if seen[k] >= need[k]:
                 continue
             dropped += 1
-            rep.fail("B-DROPPED", f"{f.name}: no REQ row contains \"{window}\"")
+            fails.append(("B-DROPPED", f"{f.name}: no REQ row contains \"{window}\""))
+        return fails, dropped, len(heads), len(wins)
+
+    dropped = 0
+    for f in files.values():
+        reqs = req_by_file.get(f.name, [])
+        have = clause_by_file.get(f.name, {})
+        results = [scan(t, f.kind, reqs, have) for t in f.coverage_texts()]
+        # Baseline is the last extraction (raw, for a PDF). A candidate
+        # counts only if it finds at least as many headings and trigger
+        # windows as the baseline: an extraction that lost text must not be
+        # able to hide a drop by losing the sentence along with it.
+        base_heads, base_wins = results[-1][2], results[-1][3]
+        eligible = [r for r in results
+                    if r[2] >= base_heads and r[3] >= base_wins] or [results[-1]]
+        fails, n_dropped, _, _ = min(eligible, key=lambda r: r[1])
+        for code, msg in fails:
+            rep.fail(code, msg)
+        dropped += n_dropped
     return len(rows), dropped
 
 

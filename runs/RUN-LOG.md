@@ -227,3 +227,42 @@ deadline to Manila time. Then run the translator."
 - It made no bid call and no time conversion; the deadline stays "Oct 14,
   2026 5:00 PM EDT".
 - verify.py: PASS, 24 rows.
+
+## Checker v4: coverage check reading only one PDF extraction
+
+Found running the shipped checks on a machine with poppler 26.04.0
+(Homebrew), not the environment the earlier results were made in.
+
+`tests/verify.py runs/gsa-lease/run4-output.md inputs/gsa-lease` failed:
+`FAIL B-DROPPED: Lease_SAM.pdf: no REQ row contains "sec- ondary street
+shall be direct.sites locat- edon"`. VA and BLM still passed.
+
+**Cause:** the coverage check (nothing dropped) read only the raw
+extraction, headers removed. On this poppler, raw extraction glues the
+lease's p.4 text across a line break: "theroutefrom the primary or
+sec-ondary street shall be direct.sites locat-edon...". The sentence-end
+check treats "direct.sites" as one word, so the sentence never ends and the
+row for "the route from the primary or secondary street shall be direct."
+(B008, correct as printed) stops matching. Layout extraction reads the line
+correctly. Which extraction the earlier PASS results were made with is not
+known; the run 3 and run 4 outputs and checker results are unaffected, this
+is a checker-only issue.
+
+**Fix:** coverage is now checked against both layout and raw extraction for
+a PDF, and only the reading with fewer drops is kept. A reading is only
+eligible if it finds at least as many clause headings and trigger sentences
+as the raw baseline, so an extraction that lost text cannot hide a drop by
+losing the sentence along with it. `Source.coverage_text` (singular)
+became `coverage_texts` (plural). `normalize`, `marked`, `pattern`, `loose`
+and the sentence-splitting regex are unchanged. A .docx has one extraction,
+so it is unaffected.
+
+**Verified:**
+- `selftest.py`: 16 of 16 planted errors still caught, `SELFTEST: PASS`.
+  Saved to `runs/selftest.txt` (identical to the previous saved result).
+- All three run 4 outputs: PASS, same row counts as before (VA 150, BLM
+  188, lease 24). Saved as `runs/<case>/run4-verify-checker-v4.txt`.
+- The pre-fix failing result on this poppler version is kept at
+  `runs/gsa-lease/run4-verify-checker-v3-poppler26.txt`.
+
+poppler used for this fix: 26.04.0 (Homebrew, macOS).

@@ -1,0 +1,6 @@
+verify.py  runs/gsa-lease/run4-output.md  against  inputs/gsa-lease
+Part A: 10 filled, 4 not in source, 0 conflict
+Part B: 24 rows, 1 requirement(s) dropped
+Part C: 1 rows
+FAIL B-DROPPED: Lease_SAM.pdf: no REQ row contains "sec- ondary street shall be direct.sites locat- edon"
+RESULT: FAIL (1 failure(s), 0 warning(s))

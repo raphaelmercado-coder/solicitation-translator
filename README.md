@@ -166,6 +166,9 @@ the checker catches every one. The planted errors include a converted time
 zone, a respelled name, an invented deadline with a fake quote, a dropped
 requirement, a paraphrase, and a reformatted phone number. Run it with
 `python3 tests/selftest.py`; saved results are in `runs/selftest.txt`.
+These checks were last run with poppler 26.04.0 (Homebrew, macOS); the
+checker reads a PDF's requirement coverage against two extraction modes so
+a different poppler version reading a line differently doesn't fail it.
 
 **What the checker cannot catch:** a value placed in the wrong field, a
 conflict the translator never noticed, and whether a checkbox is really
