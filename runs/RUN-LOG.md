@@ -344,3 +344,26 @@ Checks after the change: selftest PASS (16 of 16), all three run 4 outputs
 PASS (150, 188, 24 rows), 7-word overlap scan of `translator/` against
 `inputs/` 0. These show nothing broke. Whether the change helps Sonnet
 needs new runs in claude.ai: run 8 on Sonnet, run 9 on Opus 5.5.
+
+## Run 8: Sonnet after the final-check change
+
+Same claude.ai setup as runs 6 and 7, synced to `f1af55b`, on Sonnet.
+Transcript kept as pasted (`run8-sonnet-transcript.txt`).
+
+**Not checked by verify.py.** It was copied from the rendered chat, so the
+`###`, `> ` and table marks were lost. Findings by eye against the PDF:
+- **It stopped and asked for the file name** after the PDF was attached.
+  Raph typed "Lease_SAM", and the header copies it without `.pdf`. The new
+  file-name line in the final check caused the question; no rule said not
+  to ask.
+- **Pages still wrong.** Every Part B row cites p.3; the requirements are on
+  p.4-6. A10 cites p.4; the contacts are on p.7.
+- **Hyphens still corrected:** "operations" and "available", where the PDF
+  prints "op-erations" and "avail-able".
+- Several quotes are duplicated under a second source on the wrong page.
+- All 24 rows present. Invented facts: none.
+- Slow: Raph noted it ran much longer than the Opus run.
+
+**What it shows:** the three final-check lines did not fix Sonnet's pages or
+hyphens, and one of them made it ask a question mid-run. Sonnet stays
+unsupported; the README already says to use Opus 5.5.
