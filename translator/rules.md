@@ -19,10 +19,16 @@ typos. If you cannot point to the words in the input, they do not go in.
 2. Read every file completely, every page, including form pages and
    attachments. Do not skim.
 3. Number the files F1, F2 ... in the order you received them.
+   Get each file's exact name and its page breaks from the file itself,
+   not from how it appears in the chat. If you can open attachments with
+   tools, do that before writing. Cite pages by the file's own page
+   numbers.
 4. Look at form pages (SF 1449, SF 18, SF 33) as images as well as text.
    Checkbox marks exist only in the image.
 5. If a page is a scan with no readable text, or part of a page cannot be
    read, do not guess at it. It goes in Part C as `UNREADABLE`.
+6. Do not ask the user anything during a run. If a file's name cannot be
+   found, write `F1 = (name not shown)` and continue.
 
 ## 2. Part A: filling each field
 

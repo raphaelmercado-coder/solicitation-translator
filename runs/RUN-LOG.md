@@ -444,3 +444,17 @@ file name and page structure are reachable in claude.ai; Sonnet and Opus
 name and pages from the attachment itself might fix runs 6, 8 and 10 where
 code execution is on. Untested. Its offer to regenerate the intake was not
 taken: a coached rerun would not be a clean run.
+
+## Translator change after run 10: read the file itself, never ask
+
+Two items added to `rules.md` section 1, approved by Raph:
+- Item 3: get each file's exact name and page breaks from the file itself,
+  opening attachments with tools where possible, and cite pages by the
+  file's own page numbers. Aimed at runs 6, 8 and 10.
+- Item 6: do not ask the user anything during a run; if a name cannot be
+  found, write `F1 = (name not shown)` and continue. Aimed at run 8's
+  question.
+
+Checks after the change: selftest PASS (16 of 16), all three run 4 outputs
+PASS (150, 188, 24 rows), overlap scan 0. Next: run 11 (Opus 4.8) and run
+12 (Opus 5.5) on the lease.
