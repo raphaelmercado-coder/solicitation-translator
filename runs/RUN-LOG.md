@@ -350,8 +350,16 @@ needs new runs in claude.ai: run 8 on Sonnet, run 9 on Opus 5.5.
 Same claude.ai setup as runs 6 and 7, synced to `f1af55b`, on Sonnet.
 Transcript kept as pasted (`run8-sonnet-transcript.txt`).
 
-**Not checked by verify.py.** It was copied from the rendered chat, so the
-`###`, `> ` and table marks were lost. Findings by eye against the PDF:
+The first paste came from the rendered chat and lost the Markdown marks.
+Raph then copied the Markdown with the copy button
+(`run8-sonnet-output.md`).
+
+**Result: FAIL** (`run8-verify.txt`). The header says `F1 = Lease_SAM`,
+without `.pdf`, so the checker stops at FILES. With only `.pdf` added
+(`run8-verify-with-filename.txt`): FAIL 2 (B003, B012 hyphens), 30 LOCATOR
+warnings, 24 rows, nothing dropped.
+
+Findings:
 - **It stopped and asked for the file name** after the PDF was attached.
   Raph typed "Lease_SAM", and the header copies it without `.pdf`. The new
   file-name line in the final check caused the question; no rule said not

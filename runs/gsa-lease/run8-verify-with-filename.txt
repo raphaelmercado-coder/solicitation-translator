@@ -1,0 +1,39 @@
+Diagnostic: run8-sonnet-output.md with only line 5 changed to '- F1 = Lease_SAM.pdf'. The output as delivered is checked in run8-verify.txt.
+
+verify.py  run8-sonnet-output.md (F1 name completed)  against  inputs/gsa-lease
+Part A: 10 filled, 4 not in source, 0 conflict
+Part B: 24 rows, 0 requirement(s) dropped
+Part C: 1 rows
+FAIL QUOTE: B003: not in Lease_SAM.pdf: "space should have no history of prior heavy industrial use such as large dry cleaning operations, gas stations, and industrial facilities."
+FAIL QUOTE: B012: not in Lease_SAM.pdf: "parking-to-square-foot ratio available on site shall at least meet current local code requirements, or, in absence of a local code requireme"
+WARN LOCATOR: A01 source 2: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A02 source 2: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A04 source 2: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A07 source 2: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A07 source 3: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A10 source 1: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A10 source 2: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: A12 source 1: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B001: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B002: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B004: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B005: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B006: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B007: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B008: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B009: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B010: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B011: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B013: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B014: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B015: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B016: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017a: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017b: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017c: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017d: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017e: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017f: found in Lease_SAM.pdf but not on the cited page(s)
+WARN LOCATOR: B017g: found in Lease_SAM.pdf but not on the cited page(s)
+RESULT: FAIL (2 failure(s), 30 warning(s))
