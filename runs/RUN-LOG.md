@@ -471,3 +471,4 @@ Saved as pasted (`run11-opus48-output.md`).
   PDF prints "op-erations" and "avail-able" mid-line; the rules say to keep
   a mid-line hyphen. Same two words as runs 6, 8 and 10.
 - Invented facts: none. Part C lists the Lease as NOT SUPPLIED, as run 7 did.
+- It asked Raph nothing during the run (item 6 held).
