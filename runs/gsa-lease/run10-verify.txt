@@ -1,0 +1,7 @@
+verify.py  runs/gsa-lease/run10-opus48-output.md  against  inputs/gsa-lease
+Part A: 0 filled, 0 not in source, 0 conflict
+Part B: 0 rows, 0 requirement(s) dropped
+Part C: 0 rows
+FAIL FILES: F1 = '(filename not provided)' is not in inputs/gsa-lease
+FAIL FILES: input file 'Lease_SAM.pdf' is not listed in the header
+RESULT: FAIL (2 failure(s), 0 warning(s))

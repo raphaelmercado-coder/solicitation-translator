@@ -404,3 +404,23 @@ document, B001 to B126 (`run9-sonnet-docx-output.md`, saved as pasted).
 problems, but Sonnet still adds lines, changes a letter, drops a
 requirement and misses what the notice left out. Tested and passing: Opus
 5.5 only.
+
+## Run 10: Opus 4.8 on the lease
+
+Same claude.ai project (`f1af55b`), new chat, Opus 4.8, `Lease_SAM.pdf`.
+Saved as pasted (`run10-opus48-output.md`).
+
+**Result: FAIL** (`run10-verify.txt`). The header says "(filename not
+provided)", so the checker stops at FILES. With only the file name filled
+in (`run10-verify-with-filename.txt`): FAIL 2 (B003, B012 hyphens removed),
+26 LOCATOR warnings (Part B all cited to p.3; the text is on p.4-6), 24
+rows, nothing dropped, nothing invented.
+
+**The pattern across runs 6, 8 and 10:** Sonnet and Opus 4.8 fail on this
+PDF in the same three ways: no file name, every requirement on one page,
+wrap hyphens removed ("operations", "available", "governmentdemised").
+Only Opus 5.5 (run 7) passed. Identical failures across two model families
+suggest these models may receive the PDF differently in claude.ai (text
+without page breaks or file name) rather than reading it less carefully.
+This is a hypothesis, not tested. It points to the page-marked text input
+idea for after the deadline.
