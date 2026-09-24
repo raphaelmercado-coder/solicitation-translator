@@ -266,3 +266,49 @@ so it is unaffected.
   `runs/gsa-lease/run4-verify-checker-v3-poppler26.txt`.
 
 poppler used for this fix: 26.04.0 (Homebrew, macOS).
+
+## Run 6: cold run in a real Claude project
+
+Raph ran it himself, following the README cold, in a claude.ai project on
+Sonnet. The notice was the GSA lease (`Lease_SAM.pdf`). The translator
+folder was added from GitHub (the easiest option in step 2).
+
+**What he tripped on before the run:**
+- Whether to drag the ZIP into the chat. Fixed in the README: unzip it, or
+  add from GitHub.
+- Whether to connect the folder the Cowork way. That would have exposed
+  `runs/` and `tests/`. The README now says only `translator/` goes in, and
+  why.
+- He uploaded two top-level repo files along with the translator files. The
+  README now names the files and says to upload nothing else.
+- With only the folder connected and no custom instructions, the model
+  answered "what do you do" as generic Claude. Added `translator/AGENTS.md`
+  pointing to `identity.md`. After a GitHub sync it named itself and its
+  job correctly.
+
+He started under README `91d1974`; the fixes are in `00f0972` and `8cbade2`.
+
+**Result: FAIL** (`run6-verify.txt`). The header gives F1 as "(file name
+not provided ...)" where it should say `Lease_SAM.pdf`, so the checker
+stops at FILES before reading the content.
+
+**Content**, checked on a copy with only that line filled in
+(`run6-verify-with-filename.txt`): FAIL 2, 27 warnings.
+- **All 24 rows present.** No requirement dropped. Every Part A value sits
+  inside its quote, and every Part A quote is in the notice, including the
+  wrapped emails.
+- **B003 and B012 fixed the notice's spelling.** The PDF prints
+  "op-erations" and "avail-able" mid-line. The output wrote "operations"
+  and "available". Run 4 kept them as printed. The checker failed them,
+  correctly.
+- **Pages off by one or two.** Every Part B row cites p.3. The
+  requirements are on p.4-5 of the 8-page PDF. A04, A07, A10 and A12 also
+  cite pages the quote is not on. These are warnings in the checker, but a
+  reader following the page would not find the text.
+- **Invented facts: none.**
+
+**Open questions:** runs 1-5 used Opus 5.5 working on files; run 6 used
+Sonnet in claude.ai. It is not known whether the model could see the file
+name, or how claude.ai numbers PDF pages. The three problems may come from
+the model, the platform or both. Not fixed here: changing `translator/`
+needs the owner's approval and a full rerun.
