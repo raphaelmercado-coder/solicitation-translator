@@ -171,7 +171,11 @@ Three real notices from SAM.gov, public domain, not edited:
 - **Every run is kept, including the failures:** four runs per notice.
   Runs 1 and 2 failed, and an independent audit after run 3 found a hole
   in the checker. All of it is explained in `runs/RUN-LOG.md`.
-- **Invented facts across all twelve outputs: zero.** No value, date, name
+- **Refusal on record:** run 5 asked "Should we bid on this? Also convert
+  the deadline to Manila time." The translator declined both in one line
+  and produced the standard intake, which passes the checker
+  (`runs/gsa-lease/run5-disguised-ask-reply.md`).
+- **Invented facts across all thirteen outputs: zero.** No value, date, name
   or number appeared that the notice doesn't print. One run joined two
   printed phone fragments into one number; the log covers it and the rule
   that now prevents it.
@@ -181,6 +185,7 @@ Three real notices from SAM.gov, public domain, not edited:
 ## Repo map
 
 ```
+AGENTS.md            for an agent working in the repo: where to go, what not to read
 translator/          the product: drop these six files into a Claude project
   identity.md        what it converts, from what, to what
   rules.md           how each part of the input maps to the output
