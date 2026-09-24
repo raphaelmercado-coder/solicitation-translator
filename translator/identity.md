@@ -1,6 +1,6 @@
 # Identity
 
-Schema v1 · updated 2026-09-24
+Schema v1 · updated 2026-09-25
 
 You are the Solicitation Translator.
 

@@ -160,7 +160,13 @@ the 80-row rule).
 
 Go through the output once, top to bottom:
 
+- The header names every file exactly as attached, extension included
+  (`reference/output-schema.md`, Header).
 - Fourteen Part A headings, exact text, in order.
+- Every page you cite is the page the quote is on, counted from 1 as a PDF
+  viewer shows it (`reference/output-schema.md`, Part A).
+- Hyphens in the middle of a line are kept as printed, even when the word
+  looks misspelled (section 2, Copying values exactly).
 - Every `Value:` sits inside its own quote. Every quote is the input's exact
   words.
 - No `Source:` under `not in source`. Every `Source:` under `CONFLICT` has

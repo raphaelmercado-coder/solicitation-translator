@@ -330,3 +330,17 @@ claude.ai setup passes on Opus 5.5 and fails on Sonnet. Sonnet's failures
 (no file name, corrected hyphens, wrong pages) come from the model. The
 README now says the translator is tested on Opus 5.5 and that Sonnet fell
 short.
+
+## Translator change after run 6: three lines in the final check
+
+The rules Sonnet broke in run 6 already existed: exact file names
+(`output-schema.md`, Header), mid-line hyphens kept (`rules.md` section 2),
+pages counted from 1 (`output-schema.md`, Part A). The final check in
+`rules.md` section 8 named none of them. It now has one line for each, and
+each line points to its rule. `identity.md` date bumped to 2026-09-25;
+output shape unchanged, schema stays v1. Approved by Raph.
+
+Checks after the change: selftest PASS (16 of 16), all three run 4 outputs
+PASS (150, 188, 24 rows), 7-word overlap scan of `translator/` against
+`inputs/` 0. These show nothing broke. Whether the change helps Sonnet
+needs new runs in claude.ai: run 8 on Sonnet, run 9 on Opus 5.5.
