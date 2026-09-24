@@ -1,7 +1,7 @@
 # Output schema (v1)
 
 This file is the contract. Every output has exactly this shape, in this order,
-whatever the input looks like. `tests/verify.py` parses outputs against it, so
+whatever the input looks like. The repo's checker parses outputs against it, so
 the markers below are literal: copy them exactly.
 
 The output is one Markdown document with a header and three parts.
@@ -133,7 +133,7 @@ extraction loses those marks, so a quote cannot prove them.
 - Tag the source `[visual]`.
 - Add `Mark: marked` or `Mark: not marked`.
 - The quote is the printed label next to the box, word for word.
-- `verify.py` checks the label and lists every visual mark for a person to
+- The checker proves the label and lists every visual mark for a person to
   confirm by eye.
 
 ---

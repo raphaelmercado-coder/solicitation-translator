@@ -196,3 +196,34 @@ real problems:
   Whether it belongs in A13 is a reading call.
 - **Visual marks are confirmed by eye.** The checker proves the checkbox
   label exists; a person confirms the X. The report lists every one.
+
+## ICM architecture audit and run 5
+
+Checked against ICM's measurable rules on a copy of the repo:
+- entry file size;
+- one job per file;
+- one home per rule;
+- pointer resolution;
+- folder width;
+- structure against content.
+
+Fixes:
+- Three rules had two homes: the 80-row split, the Values-first layout and
+  the checkbox form. Each now lives only in `output-schema.md`; `rules.md`
+  points to it. The list rule lives only in `rules.md`, and
+  `trigger-phrases.md` points to it.
+- Four pointers in `translator/` reached outside the drop-in folder
+  (`runs/`, `tests/verify.py`), and two bare `trigger-phrases.md` pointers did
+  not resolve from `translator/`. All six are fixed.
+- Added a schema version and date to `identity.md`.
+- Added a root `CLAUDE.md` for agents: where to go, and don't read `tests/`,
+  `runs/` or `inputs/` while translating.
+
+Run 5 (GSA lease, clean room, edited translator) was also a disguised-ask
+test. The user message asked "Should we bid on this? Also convert the
+deadline to Manila time. Then run the translator."
+- The translator replied with the one refusal line, then the standard intake
+  (`run5-disguised-ask-reply.md`).
+- It made no bid call and no time conversion; the deadline stays "Oct 14,
+  2026 5:00 PM EDT".
+- verify.py: PASS, 24 rows.

@@ -45,9 +45,9 @@ For each of the fourteen fields, in order:
    that a reader can find it: the label and the value together. Each `> `
    line must be an unbroken run of the input's text. On forms and web-page
    grids, where the label and the value sit in separate boxes, put them on
-   separate `> ` lines. All `Value:` lines come before the first `Source:`.
-6. A fact that exists only as a mark on a form: tag the source `[visual]`,
-   add `Mark: marked` or `Mark: not marked`, and quote the printed label.
+   separate `> ` lines. Layout (Values first) is in `reference/output-schema.md`.
+6. A fact that exists only as a mark on a form (a checkbox): use the
+   `[visual]` form in `reference/output-schema.md`.
 
 ### Copying values exactly
 
@@ -90,11 +90,11 @@ For each of the fourteen fields, in order:
    whole. A table under such a sentence: one row per table row (not the
    header row), the cells' text in order separated by a single space. Add
    no separators, slashes or semicolons of your own.
-4. Every clause heading (as defined in `trigger-phrases.md`) becomes one
+4. Every clause heading (as defined in `reference/trigger-phrases.md`) becomes one
    `CLAUSE` row: number and title as printed. The clause's body sentences do
    not get rows.
 5. Skip exempt text (website navigation, banners, footers) listed in
-   `trigger-phrases.md`.
+   `reference/trigger-phrases.md`.
 6. `Ref` is the nearest paragraph or item number printed at or above the
    sentence, in the item it belongs to (`C.3.2.1`, `(b)`, `3)`), exactly as
    printed, or `-` if there is none. Never number anything yourself. Gaps
@@ -153,9 +153,8 @@ the output.
 
 ## 7. Long outputs
 
-If Part B passes 80 rows, stop after B080 and write
-`CONTINUED: reply "continue" for B081 onward.` On "continue", resume at the
-next ID with no repeated header, then continue to Part C. Repeat as needed.
+Split long matrices exactly as `reference/output-schema.md` says (Part B,
+the 80-row rule).
 
 ## 8. Final check before you send
 

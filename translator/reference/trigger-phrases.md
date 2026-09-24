@@ -1,7 +1,7 @@
 # Trigger phrases, clause rule and exemptions (Part B)
 
 This file decides what counts as a requirement. The translator uses it to
-build Part B. `tests/verify.py` reads the fenced blocks below directly, so
+build Part B. The repo's checker reads the fenced blocks below directly, so
 the translator and the checker work from one list.
 
 ## Trigger phrases
@@ -22,9 +22,7 @@ will not be acceptable
 ```
 
 - One row per sentence, even if the sentence has several triggers.
-- A sentence that ends with a colon and introduces a list: the sentence is
-  one row, and every list item under it is its own row (B014a, B014b ...),
-  whether or not the item contains a trigger.
+- Lists under a requirement sentence: see `../rules.md`, section 3, item 3.
 - Definitions, headings and table labels are not requirements unless they
   contain a trigger.
 - "Should" is on the list on purpose. Notices use it for real requirements

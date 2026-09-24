@@ -2,8 +2,7 @@
 
 Three short worked cases showing the contract holding, then the failure
 modes that break it. The inputs are illustrative excerpts written for this
-file; they are not real notices. Real, full runs are in the repo's `runs/`
-folder.
+file; they are not real notices.
 
 ---
 
@@ -140,7 +139,7 @@ named but absent, so it goes in Part C.
 ## Failure modes
 
 Each of these puts something in the output that was not in the input, or
-drops something that was. Each one fails `verify.py`.
+drops something that was. The repo's checker fails every one.
 
 | Failure | Looks like | Correct |
 |---|---|---|
