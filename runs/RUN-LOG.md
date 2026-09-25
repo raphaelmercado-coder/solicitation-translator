@@ -494,3 +494,15 @@ version the repo ships.
 | 12 | Opus 5.5 | `e034d14` | PASS |
 
 Run 9 (Sonnet, .docx, `f1af55b`): FAIL 5, see above.
+
+## Known limits after runs 6-12, and the planned next step
+
+- **Only Opus 5.5 passes.** Opus 4.8 comes within two hyphens (run 11);
+  Sonnet falls further short on PDF and .docx (runs 8, 9).
+- **Next step, not done:** test [Docling](https://github.com/docling-project/docling)
+  as an optional input step. It converts a PDF to structured text with
+  page numbers, reading order and tables, runs locally, and has OCR and an
+  MCP server. Planned test: convert the three notices, feed the result to
+  Sonnet and Opus 4.8, check the outputs against the original files. Open
+  questions: whether its text keeps printed hyphens exactly, whether it
+  keeps checkbox marks, and how to mark text that came from OCR.
