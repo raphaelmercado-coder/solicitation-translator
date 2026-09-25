@@ -1,0 +1,5 @@
+verify.py  runs/gsa-lease/run12-opus55-output.md  against  inputs/gsa-lease
+Part A: 10 filled, 4 not in source, 0 conflict
+Part B: 24 rows, 0 requirement(s) dropped
+Part C: 1 rows
+RESULT: PASS (0 failure(s), 0 warning(s))

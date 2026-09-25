@@ -472,3 +472,25 @@ Saved as pasted (`run11-opus48-output.md`).
   a mid-line hyphen. Same two words as runs 6, 8 and 10.
 - Invented facts: none. Part C lists the Lease as NOT SUPPLIED, as run 7 did.
 - It asked Raph nothing during the run (item 6 held).
+
+## Run 12: Opus 5.5 on the current translator
+
+Same project synced to `e034d14`, new chat, Opus 5.5, `Lease_SAM.pdf`.
+Saved as pasted (`run12-opus55-output.md`).
+
+**Result: PASS**, 24 rows, 0 failures, 0 warnings (`run12-verify.txt`).
+File name, pages and printed hyphens all correct. This is the translator
+version the repo ships.
+
+**Where the model runs stand (lease PDF, claude.ai):**
+
+| Run | Model | Translator | Result |
+|---|---|---|---|
+| 6 | Sonnet | `8cbade2` | FAIL: no file name, wrong pages, hyphens |
+| 7 | Opus 5.5 | `8cbade2` | PASS |
+| 8 | Sonnet | `f1af55b` | FAIL: asked for the name, wrong pages, hyphens |
+| 10 | Opus 4.8 | `f1af55b` | FAIL: no file name, wrong pages, hyphens |
+| 11 | Opus 4.8 | `e034d14` | FAIL 2: hyphens only |
+| 12 | Opus 5.5 | `e034d14` | PASS |
+
+Run 9 (Sonnet, .docx, `f1af55b`): FAIL 5, see above.

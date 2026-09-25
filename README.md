@@ -45,9 +45,10 @@ and one missed requirement can get a bid thrown out.
 Want to see a finished output first? Open
 [`runs/blm-janitorial/run4-output.md`](runs/blm-janitorial/run4-output.md).
 
-The runs in this repo were made with Claude Opus 5.5. A cold run in a
-claude.ai project passed on Opus 5.5 and failed on Sonnet (wrong pages,
-corrected spellings), so use Opus 5.5 (`runs/RUN-LOG.md`, runs 6 and 7).
+**Which model:** use Opus 5.5 for a clean pass. The files are plain
+Markdown and work with any model; the checker shows whether a run holds up.
+In claude.ai, Opus 4.8 came within two hyphens of passing and Sonnet fell
+short (`runs/RUN-LOG.md`, runs 6 to 12).
 
 **What to feed it:** all the files of one notice, as **text-based PDF or
 .docx**:
@@ -115,6 +116,10 @@ meeting, that's the most important line in the document.
 - **Catch requirements with no trigger word.** "Test each fire hydrant ..."
   has no shall/must/should, so it gets no matrix row. The trigger list is in
   `trigger-phrases.md`; extend it if your agencies write this way.
+- **Pass on every model.** Only Opus 5.5 has passed the checker. Opus 4.8
+  wrote two words without the hyphens the notice prints (run 11). Sonnet
+  also added lines, dropped a requirement and missed documents the notice
+  names (runs 8 and 9). Run the checker on any other model.
 - **Handle a full RFP in one pass.** It's built for RFQs, Sources Sought,
   Presolicitations and combined synopsis/solicitations, roughly up to 40-50
   pages. It was tested on 8, 40 and 41 pages.
@@ -193,14 +198,15 @@ Three real notices from SAM.gov, public domain, not edited:
 - **Every run is kept, including the failures:** at least four runs per notice.
   Runs 1 and 2 failed, and an independent audit after run 3 found a hole
   in the checker. All of it is explained in `runs/RUN-LOG.md`.
-- **Cold run by a person in a real claude.ai project:** passes on Opus 5.5
-  (`runs/gsa-lease/run7-opus-output.md`). The same setup on Sonnet fails
-  and is logged (run 6).
+- **Cold runs by a person in a real claude.ai project:** pass on Opus 5.5,
+  on the current translator (`runs/gsa-lease/run12-opus55-output.md`).
+  Runs on Sonnet and Opus 4.8 fail and are logged, with what each one
+  changed in the translator.
 - **Refusal on record:** run 5 asked "Should we bid on this? Also convert
   the deadline to Manila time." The translator declined both in one line
   and produced the standard intake, which passes the checker
   (`runs/gsa-lease/run5-disguised-ask-reply.md`).
-- **Invented facts across all fifteen outputs: zero.** No value, date, name
+- **Invented facts across all twenty outputs: zero.** No value, date, name
   or number appeared that the notice doesn't print. One run joined two
   printed phone fragments into one number; the log covers it and the rule
   that now prevents it.
